@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
-class AuthenticationButton extends StatelessWidget {
-  const AuthenticationButton({super.key, required this.name});
+class AuthenticationButton extends StatefulWidget {
+  const AuthenticationButton({
+    super.key,
+    required this.name,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.componentFunction,
+  });
 
   final String name;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final void Function()? componentFunction;
 
+  @override
+  State<AuthenticationButton> createState() => _AuthenticationButtonState();
+}
+
+class _AuthenticationButtonState extends State<AuthenticationButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {developer.log("Pressed Button $name")},
+      onTap: widget.componentFunction,
       child: Card(
         elevation: 1,
-        color: name == "LOG IN" ? Colors.white : Colors.black,
+        color: widget.backgroundColor,
         shape: const RoundedRectangleBorder(
           side: BorderSide(),
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -22,11 +36,11 @@ class AuthenticationButton extends StatelessWidget {
           height: MediaQuery.of(context).size.height / 12,
           child: Center(
             child: Text(
-              name,
+              widget.name,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: name == "LOG IN" ? Colors.black : Colors.white,
+                color: widget.textColor,
               ),
             ),
           ),
