@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:teg_auto/card_page.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/home_page.dart';
@@ -13,6 +14,7 @@ const ItemCard data =
   km: "10",
   color: "Blue",
   state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   )
   ;
 
@@ -50,10 +52,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
-    Text(
-      'Index 1: Create',
-      style: optionStyle,
-    ),
+    CardPage(title: "Details", data: data),
     Text(
       'Index 2: Profile',
       style: optionStyle,
@@ -68,7 +67,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       _selectedIndex = index;
     });
-    debugPrint("admin == $_isAdmin");
   }
 
   @override
