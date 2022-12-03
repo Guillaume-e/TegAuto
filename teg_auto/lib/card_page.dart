@@ -43,7 +43,7 @@ class _CardPageState extends State<CardPage> {
           child: Stack(
               children: [
                 ImageHero(
-                  tag: "HeroImage",
+                  tag: "ImageHero",
                   onTap: () {
                     Navigator.of(context).pop();
                   },

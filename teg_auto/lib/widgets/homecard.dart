@@ -26,7 +26,7 @@ class _HomeCardState extends State<HomeCard> {
                 child: Stack(
                   children: [
                     ImageHero(
-                      tag: "HeroImage",
+                      tag: "ImageHero",
                       onTap: () {
                         Navigator.push( context, MaterialPageRoute(builder: (BuildContext context) => CardPage(title: "Details", data: widget.card,)));
                       }, 
