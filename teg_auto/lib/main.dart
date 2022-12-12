@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:teg_auto/admin_page.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/home_page.dart';
@@ -45,7 +46,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  final bool _isAdmin = false;
+  final bool _isAdmin = true;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -58,10 +59,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'Index 2: Profile',
       style: optionStyle,
     ),
-    Text(
-      'Index 3: Admin',
-      style: optionStyle,
-    ),
+    AdminPage(title: "Admin")
   ];
 
   void _onItemTapped(int index) {
