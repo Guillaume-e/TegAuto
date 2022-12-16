@@ -52,7 +52,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
-    CardPage(title: "Details", data: data),
     Text(
       'Index 2: Profile',
       style: optionStyle,

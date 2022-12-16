@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisSpacing: 50,
         ),
         itemBuilder: (BuildContext context,int index,) {
-            return HomeCard(card: data[index]);
+            return HomeCard(card: data[index], index:index);
         },),
     );
     },),);
