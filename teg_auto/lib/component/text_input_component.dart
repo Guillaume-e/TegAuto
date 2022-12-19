@@ -1,8 +1,14 @@
-import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 
 class TextInputComponent extends StatefulWidget {
-  const TextInputComponent({super.key});
+  const TextInputComponent({
+    super.key,
+    required this.hintText,
+    required this.callback,
+  });
+
+  final String hintText;
+  final void Function(String)? callback;
 
   @override
   State<TextInputComponent> createState() => _TextInputStateComponent();
@@ -10,16 +16,24 @@ class TextInputComponent extends StatefulWidget {
 
 class _TextInputStateComponent extends State<TextInputComponent> {
   void saveResponse(String text) {
-    developer.log("text entered $text");
+    if (widget.callback != null) {
+      widget.callback!(text);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: saveResponse,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Nom',
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: TextField(
+        onChanged: saveResponse,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(width: 2),
+          ),
+          hintText: widget.hintText,
+          contentPadding: const EdgeInsets.all(10),
+        ),
       ),
     );
   }
