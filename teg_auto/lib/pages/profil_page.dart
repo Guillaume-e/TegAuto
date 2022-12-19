@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/widgets/profil_widget.dart';
-import 'package:teg_auto/widgets/sale_information.dart';
+import 'package:teg_auto/widgets/vehicule_card.dart';
 
-import '../classes/itemcard.dart';
-import '../widgets/vehicule_card.dart';
 class UserData {
   static User myUser = const User(
     imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg",
@@ -15,6 +14,7 @@ class UserData {
   );
 }
 
+// ignore: always_specify_types
 const List<ItemCard> data = [
     ItemCard(
   image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
@@ -60,18 +60,16 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
-    final Size size =  MediaQuery.of(context).size;
-    final user = UserData.myUser;
+    final User user = UserData.myUser;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
+        physics: const BouncingScrollPhysics(),
+        children: <Widget>[
           ProfileWidget(imagePath: user.imagePath, name: user.name, email: user.email),
           //SaleCard()
-          VehiculeCard(card: data[0], onPressed: () => null)
-        ]
-        
+          VehiculeCard(card: data[0], onPressed: () => "toto")
+        ],  
       ),
     );
     

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/classes/itemcard.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
 
+// ignore: always_specify_types
 const List<ItemCard> data = [
     ItemCard(
   image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bmw.fr%2Ffr%2Ftous-les-modeles%2Fm-series%2Fm8-coupe%2F2022%2Fbmw-m8-coupe.html&psig=AOvVaw3LneJH0KlpHGIswCfTSuuk&ust=1671388649161000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLDy74qmgfwCFQAAAAAdAAAAABAd",
@@ -63,13 +64,13 @@ class SaleCard extends StatefulWidget {
 class _SaleCardState extends State<SaleCard> {
   @override
   Widget build(BuildContext context) {
-    final Size size =  MediaQuery.of(context).size;
     return Container(
       decoration: const BoxDecoration(color: Colors.grey),
       child: ListView.builder(
         itemCount:data.length,
         itemBuilder: (BuildContext context,int index,) {
-            return VehiculeCard(card: data[index], onPressed: () => (null),);
+            // ignore: avoid_returning_null_for_void
+            return VehiculeCard(card: data[index], onPressed: () => null,);
         },),
     );
   }

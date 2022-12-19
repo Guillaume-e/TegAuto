@@ -7,7 +7,7 @@ class ProfileWidget extends StatefulWidget {
     Key? key,
     required this.imagePath,
     required this.name,
-    required this.email
+    required this.email,
   }) : super(key: key);
   final String imagePath;
   final String name;
@@ -19,15 +19,15 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   Widget buildName() => Column(
-        children: [
+        children: <Widget>[
           Text(
             widget.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
           Text(
             widget.email,
-            style: TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.grey),
           )
         ],
       );
@@ -35,7 +35,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           PickImage(imagePath: widget.imagePath),
           const SizedBox(height: 24),
           buildName(),

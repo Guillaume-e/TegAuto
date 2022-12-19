@@ -41,11 +41,11 @@ class _PickImageState extends State<PickImage> {
   }
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
+    final Color color = Theme.of(context).colorScheme.primary;
 
     return Center(
       child: Stack(
-        children: [
+        children: <Widget>[
           buildImage(),
           Positioned(
             bottom: 0,
