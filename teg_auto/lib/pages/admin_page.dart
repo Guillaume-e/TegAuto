@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:teg_auto/lib/admin_page.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
+=======
+import 'package:teg_auto/model/itemcard.dart';
+>>>>>>> 4c90c839170ff20211061673aa1fe22add8ded63:teg_auto/lib/pages/admin_page.dart
 
+// ignore: always_specify_types
 const List<ItemCard> data = [
     ItemCard(
   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
@@ -11,8 +16,12 @@ const List<ItemCard> data = [
   price: "100000",
   km: "10",
   color: "Blue",
+<<<<<<< HEAD:teg_auto/lib/admin_page.dart
   state: "New",
   details: '',
+=======
+  state: "New", details: '',
+>>>>>>> 4c90c839170ff20211061673aa1fe22add8ded63:teg_auto/lib/pages/admin_page.dart
   ),
     ItemCard(
   image: "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
@@ -21,8 +30,12 @@ const List<ItemCard> data = [
   price: "90000",
   km: "30K",
   color: "Green",
+<<<<<<< HEAD:teg_auto/lib/admin_page.dart
   state: "Used",
   details: '',
+=======
+  state: "Used", details: '',
+>>>>>>> 4c90c839170ff20211061673aa1fe22add8ded63:teg_auto/lib/pages/admin_page.dart
   ),
     ItemCard(
   image: "assets/images/MANHART-Urus-800-Website-3.jpg",
@@ -31,8 +44,12 @@ const List<ItemCard> data = [
   price: "190000",
   km: "0",
   color: "Yellow",
+<<<<<<< HEAD:teg_auto/lib/admin_page.dart
   state: "New",
   details: '',
+=======
+  state: "New", details: '',
+>>>>>>> 4c90c839170ff20211061673aa1fe22add8ded63:teg_auto/lib/pages/admin_page.dart
   )
 ];
 
@@ -50,13 +67,11 @@ class _AdminPageState extends State<AdminPage> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (_, int counter) {
-    return Container(
+      body: Container(
       decoration: const BoxDecoration(color: Colors.white),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Container(
             padding: const EdgeInsets.all(5),
             margin: const EdgeInsets.only(top: 10),
@@ -82,7 +97,7 @@ class _AdminPageState extends State<AdminPage> {
               decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: const <Widget> [
                     Icon(Icons.block, color: Colors.black, size: 30),
                     Center(child: Text("Ban", style: TextStyle(fontSize: 22),)),
                   ],
@@ -104,7 +119,7 @@ class _AdminPageState extends State<AdminPage> {
           ),
         ],
       ),
-    );
-    },),);
+    ),
+  );
   }
 }

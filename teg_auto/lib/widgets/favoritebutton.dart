@@ -20,7 +20,7 @@ class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderSta
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1)
+      duration: const Duration(seconds: 1),
       );
       _colorAnimation = ColorTween(begin: Colors.white, end: Colors.orange)
       .animate(_animationController);
@@ -51,6 +51,7 @@ class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderSta
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return  GestureDetector(
       onTap: () {
@@ -58,7 +59,7 @@ class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderSta
       },
       child: RotationTransition(
         turns: _animationController,
-        child: Image.asset('assets/images/tire (1).png', cacheHeight: 45, cacheWidth: 45, color: _colorAnimation.value,)
+        child: Image.asset('assets/images/tire (1).png', cacheHeight: 45, cacheWidth: 45, color: _colorAnimation.value),
       ),
     );
   }

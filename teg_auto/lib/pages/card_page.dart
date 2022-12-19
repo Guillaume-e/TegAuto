@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teg_auto/classes/itemcard.dart';
-import 'package:teg_auto/counter_bloc.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
 import 'package:teg_auto/widgets/info_display.dart';
 
-
-// const ItemCard data =
-//     ItemCard(
-//   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
-//   brand: "Bmw",
-//   model: "M8 Competition",
-//   price: "100000",
-//   km: "10",
-//   color: "Blue",
-//   state: "New",
-//   details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
-//   );
 
 class CardPage extends StatefulWidget {
   const CardPage({super.key, required this.title, required this.data, required this.index});
@@ -40,7 +26,7 @@ class _CardPageState extends State<CardPage> {
           height: size.height,
           width: size.width,
           child: Stack(
-              children: [
+              children: <Widget>[
                 ImageHero(
                   tag: "ImageHero${widget.index}",
                   onTap: () {
