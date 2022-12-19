@@ -7,6 +7,7 @@ class ItemCard {
     required this.km,
     required this.color,
     required this.state,
+    required this.details,
   });
   final String image;
   final String brand;
@@ -15,4 +16,5 @@ class ItemCard {
   final String km;
   final String color;
   final String state;
+  final String details;
 }

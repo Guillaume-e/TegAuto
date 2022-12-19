@@ -13,6 +13,7 @@ const List<ItemCard> data = [
   km: "10",
   color: "Blue",
   state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
     ItemCard(
   image: "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
@@ -22,6 +23,7 @@ const List<ItemCard> data = [
   km: "30K",
   color: "Green",
   state: "Used",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
     ItemCard(
   image: "assets/images/MANHART-Urus-800-Website-3.jpg",
@@ -31,6 +33,7 @@ const List<ItemCard> data = [
   km: "0",
   color: "Yellow",
   state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   )
 ];
 
@@ -58,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisSpacing: 50,
         ),
         itemBuilder: (BuildContext context,int index,) {
-            return HomeCard(card: data[index]);
+            return HomeCard(card: data[index], index:index);
         },),
     );
     },),);
