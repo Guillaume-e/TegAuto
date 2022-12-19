@@ -4,6 +4,7 @@ import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/widgets/homecard.dart';
 
+// ignore: always_specify_types
 const List<ItemCard> data = [
     ItemCard(
   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",

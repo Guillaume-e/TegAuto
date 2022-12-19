@@ -1,6 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teg_auto/card_page.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/home_page.dart';
@@ -19,7 +19,9 @@ const ItemCard data =
   )
   ;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
