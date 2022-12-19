@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "360355824770",
+    "project_id": "tegauto-573df",
+    "storage_bucket": "tegauto-573df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360355824770:android:1ba3c95e66cd1ea515209b",
+        "android_client_info": {
+          "package_name": "com.example.teg_auto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360355824770-f0bil74lp6i6k0nv9u3mca099lf0g631.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPdN3RIfqoOsZZL0T3vb4JgeRIDgg82jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360355824770-f0bil74lp6i6k0nv9u3mca099lf0g631.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
