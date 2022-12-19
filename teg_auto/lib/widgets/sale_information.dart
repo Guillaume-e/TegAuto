@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teg_auto/classes/itemcard.dart';
-import 'package:teg_auto/counter_bloc.dart';
-import 'package:teg_auto/widgets/homecard.dart';
+import 'package:teg_auto/model/itemcard.dart';
+import 'package:teg_auto/widgets/vehicule_card.dart';
 
+// ignore: always_specify_types
 const List<ItemCard> data = [
     ItemCard(
-  image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.bmw.fr%2Ffr%2Ftous-les-modeles%2Fm-series%2Fm8-coupe%2F2022%2Fbmw-m8-coupe.html&psig=AOvVaw3LneJH0KlpHGIswCfTSuuk&ust=1671388649161000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLDy74qmgfwCFQAAAAAdAAAAABAd",
   brand: "Bmw",
   model: "M8 Competition",
   price: "100000",
@@ -37,33 +36,43 @@ const List<ItemCard> data = [
   )
 ];
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+class SaleCard extends StatefulWidget {
 
-  final String title;
+  const SaleCard({
+    Key? key,
+    /*
+    required this.imagePath,
+    required this.brand,
+    required this.model,
+    required this.km,
+    required this.price
+    */
+
+  }) : super(key: key);
+  /*
+  final String imagePath;
+  final String brand;
+  final String model;
+  final String km;
+  final String price;
+  */
+
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SaleCard> createState() => _SaleCardState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SaleCardState extends State<SaleCard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (_, int counter) {
     return Container(
       decoration: const BoxDecoration(color: Colors.grey),
-      child: GridView.builder(
+      child: ListView.builder(
         itemCount:data.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            mainAxisSpacing: 50,
-        ),
         itemBuilder: (BuildContext context,int index,) {
-            return HomeCard(card: data[index], index:index);
+            // ignore: avoid_returning_null_for_void
+            return VehiculeCard(card: data[index], onPressed: () => null,);
         },),
     );
-    },),);
   }
+
 }
