@@ -34,6 +34,7 @@ class _HomeCardState extends State<HomeCard> {
                       height: 170,
                       width: 350,
                       image: widget.card.image,
+                      radius: 30,
                     ),
                     Positioned(
                       top: 140,

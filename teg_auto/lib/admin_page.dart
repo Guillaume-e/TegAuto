@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
-import 'package:teg_auto/widgets/homecard.dart';
 
 const List<ItemCard> data = [
     ItemCard(
@@ -13,6 +12,7 @@ const List<ItemCard> data = [
   km: "10",
   color: "Blue",
   state: "New",
+  details: '',
   ),
     ItemCard(
   image: "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
@@ -22,6 +22,7 @@ const List<ItemCard> data = [
   km: "30K",
   color: "Green",
   state: "Used",
+  details: '',
   ),
     ItemCard(
   image: "assets/images/MANHART-Urus-800-Website-3.jpg",
@@ -31,6 +32,7 @@ const List<ItemCard> data = [
   km: "0",
   color: "Yellow",
   state: "New",
+  details: '',
   )
 ];
 

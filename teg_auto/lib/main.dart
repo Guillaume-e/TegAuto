@@ -54,6 +54,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
     Text(
+      'Index 1: Add',
+      style: optionStyle,
+    ),
+        Text(
       'Index 2: Profile',
       style: optionStyle,
     ),

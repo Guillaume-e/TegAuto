@@ -49,6 +49,7 @@ class _CardPageState extends State<CardPage> {
                   height: size.height * 0.25,
                   width: size.width,
                   image: widget.data.image,
+                  radius: 0,
                 ),
                 Positioned(
                   top: size.height * 0.2,
