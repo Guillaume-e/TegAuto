@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:teg_auto/classes/itemcard.dart';
-import 'package:teg_auto/counter_bloc.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/widgets/homecard.dart';
 
 // ignore: always_specify_types
@@ -51,9 +49,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (_, int counter) {
-    return Container(
+      body: Container(
       decoration: const BoxDecoration(color: Colors.grey),
       child: GridView.builder(
         itemCount:data.length,
@@ -62,9 +58,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisSpacing: 50,
         ),
         itemBuilder: (BuildContext context,int index,) {
-            return HomeCard(card: data[index]);
+            return HomeCard(card: data[index], index:index);
         },),
-    );
-    },),);
+    ),
+  );
   }
 }

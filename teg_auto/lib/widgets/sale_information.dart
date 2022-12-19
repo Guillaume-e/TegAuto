@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/classes/itemcard.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
 
 // ignore: always_specify_types

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/widgets/profil_widget.dart';
+import 'package:teg_auto/widgets/vehicule_card.dart';
 
-import '../classes/itemcard.dart';
-import '../widgets/vehicule_card.dart';
 class UserData {
   static User myUser = const User(
     imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg",

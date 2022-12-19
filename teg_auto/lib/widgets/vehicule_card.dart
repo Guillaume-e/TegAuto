@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/classes/itemcard.dart';
+import 'package:teg_auto/model/itemcard.dart';
 
 String image = "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg";
 class VehiculeCard extends StatelessWidget {
