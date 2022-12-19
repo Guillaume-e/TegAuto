@@ -4,6 +4,7 @@ import 'package:teg_auto/card_page.dart';
 import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/home_page.dart';
+import 'package:teg_auto/pages/profil_page.dart';
 
 const ItemCard data = 
   ItemCard(
@@ -52,11 +53,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
-    CardPage(title: "Details", data: data),
-    Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
+    ProfilPage(title: "Profil"),
     Text(
       'Index 3: Admin',
       style: optionStyle,
