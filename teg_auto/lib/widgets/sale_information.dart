@@ -6,22 +6,9 @@ class SaleCard extends StatefulWidget {
 
   const SaleCard({
     Key? key,
-    /*
-    required this.imagePath,
-    required this.brand,
-    required this.model,
-    required this.km,
-    */
     required this.listCard
 
   }) : super(key: key);
-  /*
-  final String imagePath;
-  final String brand;
-  final String model;
-  final String km;
-  final String price;
-  */
   final List<ItemCard> listCard;
 
   @override

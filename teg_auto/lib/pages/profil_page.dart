@@ -25,7 +25,7 @@ const List<ItemCard> data = <ItemCard>[
   details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
     ItemCard(
-  image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  image: "https://cdn.motor1.com/images/mgl/8bpn2/s1/4x3/2018-porsche-911-gt3-rs.webp",
   brand: "Porsche",
   model: "911 GT3 RS",
   price: "90000",
@@ -35,7 +35,7 @@ const List<ItemCard> data = <ItemCard>[
   details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
     ItemCard(
-    image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
+    image: "https://cdn.motor1.com/images/mgl/AkBOMx/s1/lamborghini-urus-by-mansory-and-mtm.jpg",
   brand: "Lamborghini",
   model: "Urus",
   price: "190000",
@@ -45,6 +45,20 @@ const List<ItemCard> data = <ItemCard>[
   details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   )
 ];
+
+const List<ItemCard> data2 = <ItemCard>[
+    ItemCard(
+  image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  brand: "Bmw",
+  model: "M8 Competition",
+  price: "100000",
+  km: "10",
+  color: "Blue",
+  state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+  ),
+];
+
 
 
 class ProfilPage extends StatefulWidget {
@@ -79,6 +93,7 @@ class _ProfilPageState extends State<ProfilPage> {
           },
       body: Column(
         children: const <Widget> [
+          SizedBox(height: 30),
           Material(
             child: TabBar(
               labelColor: Colors.black,
@@ -105,7 +120,7 @@ class _ProfilPageState extends State<ProfilPage> {
             child: TabBarView(
               children: <Widget>[
                 SaleCard(listCard: data),
-                SaleCard(listCard: data),
+                SaleCard(listCard: data2),
               ],
             ),
           ),
