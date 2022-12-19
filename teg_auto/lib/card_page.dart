@@ -20,10 +20,11 @@ import 'package:teg_auto/widgets/info_display.dart';
 //   );
 
 class CardPage extends StatefulWidget {
-  const CardPage({super.key, required this.title, required this.data});
+  const CardPage({super.key, required this.title, required this.data, required this.index});
 
   final String title;
   final ItemCard data;
+  final int index;
   @override
   State<CardPage> createState() => _CardPageState();
 }
@@ -34,16 +35,14 @@ class _CardPageState extends State<CardPage> {
     final Size size =  MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (_, int counter) {
-    return Container(
+      body:  Container(
           decoration: const BoxDecoration(color: Colors.white),
           height: size.height,
           width: size.width,
           child: Stack(
               children: [
                 ImageHero(
-                  tag: "ImageHero",
+                  tag: "ImageHero${widget.index}",
                   onTap: () {
                     Navigator.of(context).pop();
                   },
@@ -100,7 +99,6 @@ class _CardPageState extends State<CardPage> {
                     child: Text(widget.data.details, textAlign: TextAlign.justify, style: const TextStyle(fontSize: 14),),),)
               ],
           ),
-      );
-    },),);
+    ),);
   }
 }
