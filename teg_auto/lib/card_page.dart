@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teg_auto/classes/itemcard.dart';
+import 'package:teg_auto/counter_bloc.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
 import 'package:teg_auto/widgets/info_display.dart';
@@ -46,8 +48,7 @@ class _CardPageState extends State<CardPage> {
                   },
                   height: size.height * 0.25,
                   width: size.width,
-                  image: widget.data.image,
-                  radius: 0,
+                  image: widget.data.image, radius: 30,
                 ),
                 Positioned(
                   top: size.height * 0.2,

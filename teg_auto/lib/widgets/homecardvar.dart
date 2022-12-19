@@ -23,7 +23,7 @@ class HomeCardVar extends StatelessWidget {
                 height: size.height * 0.50,
                 width: size.width * 0.85,
                 child: Stack(
-                  children: <Widget>[
+                  children: [
                     ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(50)),
                       child: SizedBox(

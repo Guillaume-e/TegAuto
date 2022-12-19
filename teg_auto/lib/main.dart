@@ -1,11 +1,25 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:teg_auto/pages/admin_page.dart';
-import 'package:teg_auto/pages/home_page.dart';
-import 'package:teg_auto/pages/profil_page.dart';
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:teg_auto/card_page.dart';
+import 'package:teg_auto/admin_page.dart';
+import 'package:teg_auto/classes/itemcard.dart';
+import 'package:teg_auto/counter_bloc.dart';
+import 'package:teg_auto/home_page.dart';
+
+const ItemCard data = 
+  ItemCard(
+  image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  brand: "Bmw",
+  model: "M8 Competition",
+  price: "100000",
+  km: "10",
+  color: "Blue",
+  state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+  )
+  ;
+
+void main() {
   runApp(const MyApp());
 }
 
@@ -17,7 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Teg Auto",
       theme: ThemeData(primaryColor: Colors.blue, fontFamily: 'Confortaa'),
-      home: const MyStatefulWidget(),
+      home: BlocProvider<CounterBloc>(
+        create: (_) => CounterBloc(),
+        child: const MyStatefulWidget(),
+      ),
     );
   }
 }
@@ -32,20 +49,18 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   final bool _isAdmin = true;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
-<<<<<<< HEAD
     Text(
       'Index 1: Add',
       style: optionStyle,
     ),
-        Text(
+    Text(
       'Index 2: Profile',
       style: optionStyle,
     ),
-=======
-    ProfilPage(title: "Profil"),
->>>>>>> 4c90c839170ff20211061673aa1fe22add8ded63
     AdminPage(title: "Admin")
   ];
 
@@ -72,6 +87,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               width: 75,
               decoration: BoxDecoration(borderRadius:   BorderRadius.circular(100), color: Colors.blue),
               child: const Icon(Icons.home),),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.add),
+            label: 'Add',
+            backgroundColor: const Color.fromARGB(255, 159, 163, 158),
+            activeIcon: Container(
+              height: 35,
+              width: 75,
+              decoration: BoxDecoration(borderRadius:   BorderRadius.circular(100), color: Colors.blue),
+              child: const Icon(Icons.add),),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.person),

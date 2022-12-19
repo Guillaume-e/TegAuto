@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/itemcard.dart';
-import 'package:teg_auto/pages/card_page.dart';
+import 'package:teg_auto/card_page.dart';
+import 'package:teg_auto/classes/itemcard.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
 import 'package:teg_auto/widgets/info_display.dart';
+// import '../assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg' as bmw;
 
 class HomeCard extends StatefulWidget {
   const HomeCard({super.key, required this.card, required this.index});
@@ -24,7 +25,7 @@ class _HomeCardState extends State<HomeCard> {
                 height: 350,
                 width: 350,
                 child: Stack(
-                  children: <Widget>[
+                  children: [
                     ImageHero(
                       tag: "ImageHero${widget.index}",
                       onTap: () {
@@ -32,8 +33,7 @@ class _HomeCardState extends State<HomeCard> {
                       }, 
                       height: 170,
                       width: 350,
-                      image: widget.card.image,
-                      radius: 30,
+                      image: widget.card.image, radius: 30,
                     ),
                     Positioned(
                       top: 140,
@@ -42,7 +42,7 @@ class _HomeCardState extends State<HomeCard> {
                         decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(100)),
                         height: 57,
                         width: 57,
-                        child: const FavoriteButton(),
+                        child: const FavoriteButton()
                     ),),
                     Positioned(
                       bottom: 125,
