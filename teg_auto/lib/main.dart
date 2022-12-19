@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:teg_auto/home_page.dart';
+import 'package:teg_auto/pages/admin_page.dart';
+import 'package:teg_auto/pages/home_page.dart';
 import 'package:teg_auto/pages/profil_page.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -32,15 +32,10 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   final bool _isAdmin = true;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
     ProfilPage(title: "Profil"),
-    Text(
-      'Index 3: Admin',
-      style: optionStyle,
-    ),
+    AdminPage(title: "Admin")
   ];
 
   void _onItemTapped(int index) {

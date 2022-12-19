@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/card_page.dart';
 import 'package:teg_auto/model/itemcard.dart';
+import 'package:teg_auto/pages/card_page.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
 import 'package:teg_auto/widgets/info_display.dart';
