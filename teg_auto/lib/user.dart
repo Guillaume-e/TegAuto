@@ -6,12 +6,12 @@ class User extends ChangeNotifier {
 
   void setName(String newName) {
     _name = newName;
-    notifyListeners();
+    // notifyListeners();
   }
 
   void setEmail(String newEmail) {
     _email = newEmail;
-    notifyListeners();
+    // notifyListeners();
   }
 
   String getEmail() {
