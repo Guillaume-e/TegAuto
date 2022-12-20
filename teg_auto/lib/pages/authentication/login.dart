@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:teg_auto/authentication/authentication_button.dart';
-import 'package:teg_auto/component/text_input_component.dart';
-import 'package:teg_auto/user.dart';
+import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/pages/authentication/authentication_button.dart';
+import 'package:teg_auto/pages/navigation_page.dart';
+import 'package:teg_auto/widgets/text_input_component.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,11 +17,21 @@ class _LoginState extends State<Login> {
   String _password = "";
 
   void goToHomePage() {
-    final User user = context.watch<User>();
-    final bool isConnected = user.loginExistingUser(_email, _password);
-    if (isConnected == true) {
-      user.setEmail(_email);
-    }
+    final User user = context.read<User>();
+    user.loginExistingUser(_email, _password).then((bool loginStatus) {
+      if (loginStatus == true) {
+        user.setEmail(_email);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute<NavigationPage>(
+            builder: (BuildContext context) {
+              return const NavigationPage();
+            },
+          ),
+          (_) => false,
+        );
+      }
+    });
   }
 
   void _getEmail(String email) {

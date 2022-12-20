@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/authentication/authentication_button.dart';
-import 'package:teg_auto/authentication/login.dart';
-import 'package:teg_auto/authentication/register.dart';
+import 'package:teg_auto/pages/authentication/authentication_button.dart';
+import 'package:teg_auto/pages/authentication/login.dart';
+import 'package:teg_auto/pages/authentication/register.dart';
 
 class AuthenticationPage extends StatefulWidget {
   const AuthenticationPage({super.key});
