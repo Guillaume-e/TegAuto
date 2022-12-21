@@ -41,7 +41,9 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 35,
               width: 75,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), color: Colors.blue),
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.blue,
+              ),
               child: const Icon(Icons.home),
             ),
           ),
@@ -53,7 +55,9 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 35,
               width: 75,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), color: Colors.blue),
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.blue,
+              ),
               child: const Icon(Icons.person),
             ),
           ),
@@ -66,8 +70,9 @@ class _NavigationPageState extends State<NavigationPage> {
                 height: 35,
                 width: 75,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.blue),
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.blue,
+                ),
                 child: const Icon(Icons.shield),
               ),
             ),

@@ -8,8 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider<User>(
-      create: (_) => User(),
+    ChangeNotifierProvider<UserManagement>(
+      create: (_) => UserManagement(),
       child: const MyApp(),
     ),
   );

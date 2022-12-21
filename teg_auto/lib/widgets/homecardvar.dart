@@ -17,7 +17,9 @@ class HomeCardVar extends StatelessWidget {
         child: Center(
           child: Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(50)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(50),
+            ),
             height: size.height * 0.50,
             width: size.width * 0.85,
             child: Stack(
@@ -38,8 +40,9 @@ class HomeCardVar extends StatelessWidget {
                   right: size.width * 0.05,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(100)),
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                     height: size.height * 0.08,
                     width: size.height * 0.08,
                     child: Image.asset(
@@ -52,10 +55,13 @@ class HomeCardVar extends StatelessWidget {
                 Positioned(
                   bottom: size.height * 0.18,
                   left: size.width * 0.03,
-                  child: Text("Bmw",
-                      style: TextStyle(
-                          fontSize: size.height * 0.040,
-                          fontWeight: FontWeight.bold)),
+                  child: Text(
+                    "Bmw",
+                    style: TextStyle(
+                      fontSize: size.height * 0.040,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Positioned(
                   bottom: size.height * 0.13,
@@ -80,13 +86,15 @@ class HomeCardVar extends StatelessWidget {
                     height: size.height * 0.05,
                     width: size.width * 0.22,
                     decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(50)),
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     child: Center(
-                        child: Text(
-                      "10 km",
-                      style: TextStyle(fontSize: size.height * 0.030),
-                    )),
+                      child: Text(
+                        "10 km",
+                        style: TextStyle(fontSize: size.height * 0.030),
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -96,13 +104,15 @@ class HomeCardVar extends StatelessWidget {
                     height: size.height * 0.05,
                     width: size.width * 0.22,
                     decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(50)),
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     child: Center(
-                        child: Text(
-                      "10 km",
-                      style: TextStyle(fontSize: size.height * 0.030),
-                    )),
+                      child: Text(
+                        "10 km",
+                        style: TextStyle(fontSize: size.height * 0.030),
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -112,13 +122,15 @@ class HomeCardVar extends StatelessWidget {
                     height: size.height * 0.05,
                     width: size.width * 0.22,
                     decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(50)),
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     child: Center(
-                        child: Text(
-                      "10 km",
-                      style: TextStyle(fontSize: size.height * 0.030),
-                    )),
+                      child: Text(
+                        "10 km",
+                        style: TextStyle(fontSize: size.height * 0.030),
+                      ),
+                    ),
                   ),
                 ),
               ],

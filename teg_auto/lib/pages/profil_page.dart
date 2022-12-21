@@ -55,7 +55,7 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
-    final User user = context.watch<User>();
+    final UserManagement user = context.watch<UserManagement>();
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),

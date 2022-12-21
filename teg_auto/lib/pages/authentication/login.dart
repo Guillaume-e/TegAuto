@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/pages/authentication/authentication_button.dart';
 import 'package:teg_auto/pages/navigation_page.dart';
 import 'package:teg_auto/widgets/text_input_component.dart';
@@ -17,9 +18,9 @@ class _LoginState extends State<Login> {
   String _password = "";
 
   void goToHomePage() {
-    final User user = context.read<User>();
-    user.loginExistingUser(_email, _password).then((bool loginStatus) {
-      if (loginStatus == true) {
+    final UserManagement user = context.read<UserManagement>();
+    user.loginExistingUser(_email, _password).then((UserReturn loginResponse) {
+      if (loginResponse.status == true) {
         user.setEmail(_email);
         Navigator.pushAndRemoveUntil(
           context,
@@ -30,6 +31,12 @@ class _LoginState extends State<Login> {
           ),
           (_) => false,
         );
+      } else {
+        ScaffoldMessenger.of(context)
+          ..removeCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(loginResponse.message)),
+          );
       }
     });
   }

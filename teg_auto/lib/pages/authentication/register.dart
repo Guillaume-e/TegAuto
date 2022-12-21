@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/pages/authentication/authentication_button.dart';
 import 'package:teg_auto/pages/navigation_page.dart';
 import 'package:teg_auto/widgets/text_input_component.dart';
@@ -18,11 +19,10 @@ class _RegisterState extends State<Register> {
   String _password = "";
 
   void goToHomePage() {
-    final User actualUser = context.read<User>();
+    final UserManagement actualUser = context.read<UserManagement>();
     actualUser.registerNewUser(_username, _email, _password).then(
-      (bool registerStatus) {
-        if (registerStatus == true) {
-          actualUser.setImage("");
+      (UserReturn registerResponse) {
+        if (registerResponse.status == true) {
           actualUser.setName(_username);
           actualUser.setEmail(_email);
           Navigator.pushAndRemoveUntil(
@@ -34,6 +34,12 @@ class _RegisterState extends State<Register> {
             ),
             (_) => false,
           );
+        } else {
+          ScaffoldMessenger.of(context)
+            ..removeCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text(registerResponse.message)),
+            );
         }
       },
     );
@@ -57,8 +63,8 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         title: const Text("Register"),
       ),
-      body: Consumer<User>(
-        builder: (BuildContext context, User value, Widget? child) {
+      body: Consumer<UserManagement>(
+        builder: (BuildContext context, UserManagement value, Widget? child) {
           return Column(
             children: <Widget>[
               TextInputComponent(

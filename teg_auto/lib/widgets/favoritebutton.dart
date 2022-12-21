@@ -9,10 +9,10 @@ class FavoriteButton extends StatefulWidget {
   State<FavoriteButton> createState() => _FavoriteButtonState();
 }
 
-class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderStateMixin {
-
+class _FavoriteButtonState extends State<FavoriteButton>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
-  late Animation _colorAnimation;
+  late Animation<dynamic> _colorAnimation;
   bool isFavorite = false;
 
   @override
@@ -21,28 +21,26 @@ class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderSta
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
-      );
-      _colorAnimation = ColorTween(begin: Colors.white, end: Colors.orange)
-      .animate(_animationController);
+    );
+    _colorAnimation = ColorTween(begin: Colors.white, end: Colors.orange)
+        .animate(_animationController);
 
-      _animationController.addListener(() {
-        setState((){});
-      });
+    _animationController.addListener(() {
+      setState(() {});
+    });
 
-      _animationController.addStatusListener((AnimationStatus status) {
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            isFavorite = true;
-          });
-        }
-        if (status == AnimationStatus.dismissed) {
-          setState(() {
-            isFavorite = false;
-          });
-        }
-      });
-
-
+    _animationController.addStatusListener((AnimationStatus status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          isFavorite = true;
+        });
+      }
+      if (status == AnimationStatus.dismissed) {
+        setState(() {
+          isFavorite = false;
+        });
+      }
+    });
   }
 
   @override
@@ -53,13 +51,20 @@ class _FavoriteButtonState extends State<FavoriteButton>  with TickerProviderSta
 
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
+    return GestureDetector(
       onTap: () {
-        isFavorite ? _animationController.reverse() : _animationController.forward();
+        isFavorite
+            ? _animationController.reverse()
+            : _animationController.forward();
       },
       child: RotationTransition(
         turns: _animationController,
-        child: Image.asset('assets/images/tire (1).png', cacheHeight: 45, cacheWidth: 45, color: _colorAnimation.value),
+        child: Image.asset(
+          'assets/images/tire (1).png',
+          cacheHeight: 45,
+          cacheWidth: 45,
+          color: _colorAnimation.value,
+        ),
       ),
     );
   }
