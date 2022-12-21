@@ -6,7 +6,7 @@ class SaleCard extends StatefulWidget {
 
   const SaleCard({
     Key? key,
-    required this.listCard
+    required this.listCard,
 
   }) : super(key: key);
   final List<ItemCard> listCard;

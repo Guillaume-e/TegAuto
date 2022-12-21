@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
-import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/widgets/profil_widget.dart';
 import 'package:teg_auto/widgets/sale_information.dart';
+/*
 class UserData {
   static User myUser = const User(
     imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg",
@@ -12,6 +12,7 @@ class UserData {
   
   );
 }
+*/
 
 const List<ItemCard> data = <ItemCard>[
     ItemCard(
@@ -72,19 +73,17 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final User user = UserData.myUser;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: DefaultTabController(
       length: 2,
       child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, _) {
-            return [
+            return <Widget>[
               SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                  ProfileWidget(imagePath: user.imagePath, name: user.name, email: user.email),
+                delegate: SliverChildListDelegate( <Widget>[
+                  //ProfileWidget(imagePath: user.imagePath, name: user.name, email: user.email),
+                  const ProfileWidget(imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg", name: "Guillaume EP", email: "guillaume.erem@gmail.com"),
 
                   ],
                 ),
