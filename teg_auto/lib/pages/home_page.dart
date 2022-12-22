@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
+import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
 
-// ignore: always_specify_types
-const List<ItemCard> data = [
+const List<ItemCard> data = <ItemCard>[
     ItemCard(
   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
   brand: "Bmw",
@@ -47,11 +47,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final Size size =  MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
       decoration: const BoxDecoration(color: Colors.grey),
-      child: GridView.builder(
+      child: Stack(children: <Widget>[
+
+      GridView.builder(
         itemCount:data.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
@@ -59,7 +62,28 @@ class _HomePageState extends State<HomePage> {
         ),
         itemBuilder: (BuildContext context,int index,) {
             return HomeCard(card: data[index], index:index);
-        },),
+        },
+      ),
+      Positioned(
+        right: size.width * 0.05,
+        bottom: size.height * 0.05,
+        child: ElevatedButton(
+          onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<AddCarSale>(
+                    builder: (BuildContext context) => const AddCarSale(),
+                  ),
+                );
+              },
+          style: ElevatedButton.styleFrom(
+            shape: const CircleBorder(),
+            fixedSize: const Size(70,70),
+          ),
+          child: const Icon(Icons.add_circle_outline, size: 40),
+          ),
+        ),
+      ],),
     ),
   );
   }
