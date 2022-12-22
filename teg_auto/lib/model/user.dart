@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/user_return.dart';

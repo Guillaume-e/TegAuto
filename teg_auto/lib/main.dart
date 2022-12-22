@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/pages/authentication/authentication_page.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+ await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(
     ChangeNotifierProvider<UserManagement>(
       create: (_) => UserManagement(),

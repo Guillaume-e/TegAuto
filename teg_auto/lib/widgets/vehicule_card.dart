@@ -22,7 +22,7 @@ class VehiculeCard extends StatelessWidget {
       children: <Widget>[
       ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Image.network(card.image, fit: BoxFit.fill, width: size.width * 0.38, height: size.height * 0.16),
+        child: Image.network(card.image, fit: BoxFit.cover, width: size.width * 0.38, height: size.height * 0.16),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

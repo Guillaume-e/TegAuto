@@ -1,48 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:teg_auto/model/itemcard.dart';
-import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/widgets/profil_widget.dart';
-import 'package:teg_auto/widgets/vehicule_card.dart';
+import 'package:teg_auto/widgets/sale_information.dart';
+/*
+class UserData {
+  static User myUser = const User(
+    imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg",
+    name: "Guillaume EP",
+    email: "guillaume.erem@gmail.com",
+    isAdmin: false,
+  
+  );
+}
+*/
 
-// ignore: always_specify_types
-const List<ItemCard> data = [
-  ItemCard(
-    image:
-        "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
-    brand: "Bmw",
-    model: "M8 Competition",
-    price: "100000",
-    km: "10",
-    color: "Blue",
-    state: "New",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+const List<ItemCard> data = <ItemCard>[
+    ItemCard(
+  image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  brand: "Bmw",
+  model: "M8 Competition",
+  price: "100000",
+  km: "10",
+  color: "Blue",
+  state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
-  ItemCard(
-    image:
-        "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
-    brand: "Porsche",
-    model: "911 GT3 RS",
-    price: "90000",
-    km: "30K",
-    color: "Green",
-    state: "Used",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+    ItemCard(
+  image: "https://cdn.motor1.com/images/mgl/8bpn2/s1/4x3/2018-porsche-911-gt3-rs.webp",
+  brand: "Porsche",
+  model: "911 GT3 RS",
+  price: "90000",
+  km: "30K",
+  color: "Green",
+  state: "Used",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   ),
-  ItemCard(
-    image: "assets/images/MANHART-Urus-800-Website-3.jpg",
-    brand: "Lamborghini",
-    model: "Urus",
-    price: "190000",
-    km: "0",
-    color: "Yellow",
-    state: "New",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+    ItemCard(
+    image: "https://cdn.motor1.com/images/mgl/AkBOMx/s1/lamborghini-urus-by-mansory-and-mtm.jpg",
+  brand: "Lamborghini",
+  model: "Urus",
+  price: "190000",
+  km: "0",
+  color: "Yellow",
+  state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
   )
 ];
+
+const List<ItemCard> data2 = <ItemCard>[
+    ItemCard(
+  image: "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg",
+  brand: "Bmw",
+  model: "M8 Competition",
+  price: "100000",
+  km: "10",
+  color: "Blue",
+  state: "New",
+  details: "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+  ),
+];
+
+
 
 class ProfilPage extends StatefulWidget {
   const ProfilPage({super.key, required this.title});
@@ -55,22 +73,59 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
-    final UserManagement user = context.watch<UserManagement>();
-
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          ProfileWidget(
-            imagePath: user.getImagePath(),
-            name: user.getName(),
-            email: user.getEmail(),
+      body: DefaultTabController(
+      length: 2,
+      child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, _) {
+            return <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate( <Widget>[
+                  //ProfileWidget(imagePath: user.imagePath, name: user.name, email: user.email),
+                  const ProfileWidget(imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg", name: "Guillaume EP", email: "guillaume.erem@gmail.com"),
+
+                  ],
+                ),
+              ),
+            ];
+          },
+      body: Column(
+        children: const <Widget> [
+          SizedBox(height: 30),
+          Material(
+            child: TabBar(
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.black,
+              indicatorWeight: 1,
+              indicatorColor: Colors.orange,
+              tabs: <Widget>[
+                Tab(
+                  icon: Icon(
+                    Icons.favorite,
+                    size: 40,
+                    ),
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.my_library_books ,
+                    size: 40,
+                  ),
+                ),
+              ],
+            ),
           ),
-          //SaleCard()
-          VehiculeCard(card: data[0], onPressed: () => "toto")
+          Expanded(
+            child: TabBarView(
+              children: <Widget>[
+                SaleCard(listCard: data),
+                SaleCard(listCard: data2),
+              ],
+            ),
+          ),
         ],
       ),
-    );
+    ),
+  ),);  
   }
 }
