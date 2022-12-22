@@ -1,6 +1,5 @@
-
-class ItemCard {
-  const ItemCard({
+class Car {
+  const Car({
     required this.image,
     required this.brand,
     required this.model,
