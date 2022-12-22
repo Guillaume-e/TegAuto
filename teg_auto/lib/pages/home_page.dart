@@ -50,17 +50,34 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
-      decoration: const BoxDecoration(color: Colors.grey),
-      child: GridView.builder(
-        itemCount:data.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            mainAxisSpacing: 50,
-        ),
-        itemBuilder: (BuildContext context,int index,) {
-            return HomeCard(card: data[index], index:index);
-        },),
-    ),
-  );
+        decoration: const BoxDecoration(color: Colors.grey),
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth > 600) {
+              return GridView.builder(
+                itemCount: data.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 50,
+                    crossAxisSpacing: 50),
+                itemBuilder: (BuildContext context, int index) {
+                  return HomeCard(card: data[index], index: index);
+                },
+              );
+            }
+            else {
+              return GridView.builder(
+            itemCount:data.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                mainAxisSpacing: 50,
+            ),
+            itemBuilder: (BuildContext context,int index,) {
+                return HomeCard(card: data[index], index:index);
+            },);
+            }
+          },
+      ),
+    ),);
   }
 }

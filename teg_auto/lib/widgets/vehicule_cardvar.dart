@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
 
 String image = "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg";
-class VehiculeCard extends StatelessWidget {
+class VehiculeCardVar extends StatelessWidget {
 
-  const VehiculeCard({Key? key, required this.card, required this.onPressed}) : super(key: key);
+  const VehiculeCardVar({Key? key, required this.card, required this.onPressed}) : super(key: key);
   
   final ItemCard card;
   final VoidCallback onPressed;
@@ -15,15 +15,14 @@ class VehiculeCard extends StatelessWidget {
     final Size size =  MediaQuery.of(context).size;
    return Container(
     margin:  const EdgeInsets.all(10),
-    height: 130,
-    width: 200,
+    height: size.height * 0.18,
     decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30), border: Border.all(width: 2)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
       ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Image.network(card.image, fit: BoxFit.fill, width: 120, height: 100),
+        child: Image.network(card.image, fit: BoxFit.fill, width: size.width * 0.38, height: size.height * 0.16),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

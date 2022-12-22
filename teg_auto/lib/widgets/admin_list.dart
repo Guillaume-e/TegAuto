@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
-import 'package:teg_auto/model/user.dart';
-import 'package:teg_auto/widgets/profil_widget.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
-import 'package:teg_auto/widgets/vehicule_cardvar.dart';
-
-class UserData {
-  static User myUser = const User(
-    imagePath: "https://static.vecteezy.com/ti/vecteur-libre/p3/2275847-male-avatar-profil-icone-de-souriant-caucasien-homme-vectoriel.jpg",
-    name: "Guillaume EP",
-    email: "guillaume.erem@gmail.com",
-    isAdmin: false,
-  
-  );
-}
 
 // ignore: always_specify_types
 const List<ItemCard> data = [
@@ -49,30 +36,27 @@ const List<ItemCard> data = [
   )
 ];
 
-
-class ProfilPage extends StatefulWidget {
-  const ProfilPage({super.key, required this.title});
+class AdminList extends StatefulWidget {
+  const AdminList({super.key, required this.title});
 
   final String title;
   @override
-  State<ProfilPage> createState() => _ProfilPageState();
+  State<AdminList> createState() => _AdminListState();
 }
 
-class _ProfilPageState extends State<ProfilPage> {
+class _AdminListState extends State<AdminList> {
   @override
   Widget build(BuildContext context) {
-    final User user = UserData.myUser;
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          ProfileWidget(imagePath: user.imagePath, name: user.name, email: user.email),
-          //SaleCard()
-          VehiculeCardVar(card: data[0], onPressed: () => "toto")
-        ],  
-      ),
+    return Expanded(
+      child: GridView.builder(
+          itemCount:data.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisSpacing: 50,
+          ),
+          itemBuilder: (BuildContext context,int index,) {
+              return VehiculeCard(card: data[index], onPressed: () => "toto");
+          },),
     );
-    
   }
 }
