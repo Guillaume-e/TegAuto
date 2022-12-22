@@ -3,21 +3,22 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class PickImage extends StatefulWidget {
+class PickImageCarSale extends StatefulWidget {
 
-  const PickImage({
-    Key? key,
-  
-  }) : super(key: key);
-  
+  const PickImageCarSale({
+    super.key,
+    required this.callback,
+  });
+  final void Function(String)? callback;
 
   @override
-  State<PickImage> createState() => _PickImageState();
+  State<PickImageCarSale> createState() => _PickImageCarSaleState();
 }
 
-class _PickImageState extends State<PickImage> {
+class _PickImageCarSaleState extends State<PickImageCarSale> {
    XFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
+
 
 
   void _setImageFile(XFile? value) {
@@ -36,15 +37,14 @@ class _PickImageState extends State<PickImage> {
       setState(() {
       });
     }
+    if (_imageFile?.path != null) {
+      widget.callback!(_imageFile!.path);
+    }
   }
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: 
-          buildImage(),
-         
-          
-        
+      child: buildImage(),
     );
   }
 

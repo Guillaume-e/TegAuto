@@ -6,24 +6,31 @@ class TextFormFieldCarSale extends StatefulWidget {
     required this.labelText,
     required this.textInputType,
     required this.maxLines,
+    required this.callback,
     
     });
     
     final String? labelText;
     final int maxLines;
     final TextInputType textInputType;
+    final void Function(String)? callback;
 
   @override
   State<TextFormFieldCarSale> createState() => _TextFormFieldCarSaleState();
 }
 
 class _TextFormFieldCarSaleState extends State<TextFormFieldCarSale> {
+  void onChanged(String text) {
+    if (widget.callback != null) {
+      widget.callback!(text);
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: TextFormField(
+        onChanged: onChanged,
         validator: (String? value) {
           if (value == null || value.isEmpty) {
             return 'This field is mandatory';

@@ -3,7 +3,7 @@ import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
 
-const List<ItemCard> data = [
+const List<ItemCard> data = <ItemCard>[
     ItemCard(
   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
   brand: "Bmw",
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
       decoration: const BoxDecoration(color: Colors.grey),
-      child: Stack(children: [
+      child: Stack(children: <Widget>[
 
       GridView.builder(
         itemCount:data.length,

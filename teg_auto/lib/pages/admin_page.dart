@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
 
-// ignore: always_specify_types
-const List<ItemCard> data = [
+
+const List<ItemCard> data = <ItemCard>[
     ItemCard(
   image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
   brand: "Bmw",
