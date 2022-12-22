@@ -1,12 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:teg_auto/pages/admin_page.dart';
-import 'package:teg_auto/pages/home_page.dart';
-import 'package:teg_auto/pages/profil_page.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/pages/authentication/authentication_page.dart';
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+ await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+  runApp(
+    ChangeNotifierProvider<UserManagement>(
+      create: (_) => UserManagement(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,77 +25,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Teg Auto",
-      theme: ThemeData(primaryColor: Colors.blue, fontFamily: 'Confortaa'),
-      home: const MyStatefulWidget(),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
-  final bool _isAdmin = true;
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomePage(title: "Home"),
-    ProfilPage(title: "Profil"),
-    AdminPage(title: "Admin")
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      theme: ThemeData(
+        primaryColor: Colors.blue,
+        fontFamily: 'Confortaa',
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: const Color.fromARGB(255, 159, 163, 158),
-            activeIcon: Container(
-              height: 35,
-              width: 75,
-              decoration: BoxDecoration(borderRadius:   BorderRadius.circular(100), color: Colors.blue),
-              child: const Icon(Icons.home),),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: 'Profile',
-            backgroundColor: const Color.fromARGB(255, 159, 163, 158),
-            activeIcon: Container(
-              height: 35,
-              width: 75,
-              decoration: BoxDecoration(borderRadius:   BorderRadius.circular(100), color: Colors.blue),
-              child: const Icon(Icons.person),),
-          ),
-          if (_isAdmin == true) BottomNavigationBarItem(
-            icon: const Icon(Icons.shield),
-            label: 'Admin',
-            backgroundColor: const Color.fromARGB(255, 159, 163, 158),
-            activeIcon: Container(
-              height: 35,
-              width: 75,
-              decoration: BoxDecoration(borderRadius:   BorderRadius.circular(100), color: Colors.blue),
-              child: const Icon(Icons.shield),),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        onTap: _onItemTapped,
-      ),
+      home: const AuthenticationPage(),
     );
   }
 }
