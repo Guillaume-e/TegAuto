@@ -11,9 +11,10 @@ const List<Car> data = [
     price: "100000",
     km: "10",
     color: "Blue",
-    state: "New",
+    year: "New",
     details:
         "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+    engine: "6 cylindres",
   ),
   Car(
     image:
@@ -23,9 +24,10 @@ const List<Car> data = [
     price: "90000",
     km: "30K",
     color: "Green",
-    state: "Used",
+    year: "Used",
     details:
         "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+    engine: "6 cylindres",
   ),
   Car(
     image: "assets/images/MANHART-Urus-800-Website-3.jpg",
@@ -34,9 +36,10 @@ const List<Car> data = [
     price: "190000",
     km: "0",
     color: "Yellow",
-    state: "New",
+    year: "New",
     details:
         "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
+    engine: "6 cylindres",
   )
 ];
 

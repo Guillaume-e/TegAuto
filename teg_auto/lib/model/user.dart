@@ -1,19 +1,17 @@
-import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user_return.dart';
-import 'package:teg_auto/pages/admin_page.dart';
 
 class UserManagement extends ChangeNotifier {
   String _name = "";
   String _email = "";
   bool _isAdmin = false;
   String _image = "";
-  final CarsList _cars = CarsList();
-  final CarsList _favoriteCars = CarsList();
+  CarsList _cars = CarsList();
+  CarsList _favoriteCars = CarsList();
 
   void setName(String newName) {
     _name = newName;
@@ -176,8 +174,8 @@ class UserManagement extends ChangeNotifier {
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> userDocument =
           await database.collection("Users").doc(_email).get();
-      _cars.setCarList(userDocument.get("CarsToSell"));
-      _favoriteCars.setCarList(userDocument.get("FavoritesCars"));
+      _cars = CarsList.fromJSON(userDocument.get("CarsToSell"));
+      _favoriteCars = CarsList.fromJSON(userDocument.get("FavoritesCars"));
       _isAdmin = userDocument.get("IsAdmin");
       return true;
     } catch (error) {

@@ -6,20 +6,22 @@ class Car {
     required this.price,
     required this.km,
     required this.color,
-    required this.state,
+    required this.year,
     required this.details,
+    required this.engine,
   });
 
-  factory Car.fromMAP(Map<String, dynamic> json) {
+  factory Car.fromJSON(Map<String, dynamic> json) {
     return Car(
-      image: json['image'],
-      brand: json['brand'],
-      model: json['model'],
-      price: json['price'],
-      km: json['km'],
-      color: json['color'],
-      state: json['state'],
-      details: json['details'],
+      image: json['Image'],
+      brand: json['Brand'],
+      model: json['Model'],
+      price: json['Price'],
+      km: json['Km'],
+      color: json['Color'],
+      year: json['Year'],
+      details: json['Details'],
+      engine: json['Engine'],
     );
   }
 
@@ -29,6 +31,7 @@ class Car {
   final String price;
   final String km;
   final String color;
-  final String state;
+  final String year;
   final String details;
+  final String engine;
 }

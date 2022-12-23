@@ -99,7 +99,7 @@ class _HomeCardState extends State<HomeCard> {
             Positioned(
               bottom: 33,
               right: 15,
-              child: InfoDisplay(text: widget.card.state),
+              child: InfoDisplay(text: widget.card.year),
             )
           ],
         ),

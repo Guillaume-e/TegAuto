@@ -7,6 +7,7 @@ class SaleCard extends StatefulWidget {
     Key? key,
     required this.listCard,
   }) : super(key: key);
+
   final List<Car> listCard;
 
   @override

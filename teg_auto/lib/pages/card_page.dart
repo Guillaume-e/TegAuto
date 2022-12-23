@@ -90,7 +90,7 @@ class _CardPageState extends State<CardPage> {
             Positioned(
               top: size.height * 0.43,
               right: size.height * 0.02,
-              child: InfoDisplay(text: widget.data.state),
+              child: InfoDisplay(text: widget.data.year),
             ),
             Positioned(
               top: size.height * 0.5,

@@ -10,8 +10,9 @@ const List<Car> data = [
     price: "100000",
     km: "10",
     color: "Blue",
-    state: "New",
+    year: "New",
     details: '',
+    engine: "6 cylindres",
   ),
   Car(
     image:
@@ -21,8 +22,9 @@ const List<Car> data = [
     price: "90000",
     km: "30K",
     color: "Green",
-    state: "Used",
+    year: "Used",
     details: '',
+    engine: "6 cylindres",
   ),
   Car(
     image: "assets/images/MANHART-Urus-800-Website-3.jpg",
@@ -31,8 +33,9 @@ const List<Car> data = [
     price: "190000",
     km: "0",
     color: "Yellow",
-    state: "New",
+    year: "New",
     details: '',
+    engine: "6 cylindres",
   )
 ];
 
