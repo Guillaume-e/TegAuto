@@ -9,6 +9,20 @@ class Car {
     required this.state,
     required this.details,
   });
+
+  factory Car.fromMAP(Map<String, dynamic> json) {
+    return Car(
+      image: json['image'],
+      brand: json['brand'],
+      model: json['model'],
+      price: json['price'],
+      km: json['km'],
+      color: json['color'],
+      state: json['state'],
+      details: json['details'],
+    );
+  }
+
   final String image;
   final String brand;
   final String model;

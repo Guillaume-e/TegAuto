@@ -1,7 +1,14 @@
+import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:teg_auto/model/car.dart';
 
 class CarsList {
+  CarsList();
+  CarsList.fromJSON(List<dynamic> jsonCarList)
+      : _carsList =
+            jsonCarList.map<Car>((dynamic json) => Car.fromMAP(json)).toList();
+
   List<Car> _carsList = <Car>[];
 
   void setCarList(List<Car> newCarList) {
@@ -9,6 +16,8 @@ class CarsList {
   }
 
   List<Car> getCarsList() {
+    developer.log("LIST CARD IN CAR LIST");
+    print(_carsList);
     return _carsList;
   }
 
