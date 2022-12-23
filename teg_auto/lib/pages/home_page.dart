@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
 
 // ignore: always_specify_types
@@ -55,6 +56,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<AddCarSale>(
+              builder: (BuildContext context) => const AddCarSale(),
+            ),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          fixedSize: const Size(70, 70),
+        ),
+        child: const Icon(Icons.add_circle_outline, size: 40),
+      ),
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
         decoration: const BoxDecoration(color: Colors.grey),
