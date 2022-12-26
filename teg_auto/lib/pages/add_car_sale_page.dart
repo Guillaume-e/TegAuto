@@ -1,5 +1,9 @@
-
+import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/model/car_list.dart';
+import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/widgets/pick_image_car_sale.dart';
 import 'package:teg_auto/widgets/text_form_field_car_sale.dart';
 
@@ -11,18 +15,16 @@ class AddCarSale extends StatefulWidget {
 }
 
 class _AddCarSaleState extends State<AddCarSale> {
-   final GlobalKey<FormState> _formKey = GlobalKey();
-   late String _brand = "";
-   late String _model = "";
-   late String _year = "";
-   late String _kilometer = "";
-   late String _price = "";
-   late String _description = "";
-   late String _engine = "";
-   late String _power = "";
-   late String _imagePath = "";
-  // ItemCard car = new ItemCard(image: image, brand: brand, model: model, price: price, km: km, color: color, state: state, details: details);
-  
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  late String _brand = "";
+  late String _model = "";
+  late String _year = "";
+  late String _kilometer = "";
+  late String _price = "";
+  late String _description = "";
+  late String _engine = "";
+  late String _color = "";
+  late String _imagePath = "";
 
   void _getBrand(String brand) {
     _brand = brand;
@@ -31,71 +33,144 @@ class _AddCarSaleState extends State<AddCarSale> {
   void _getModel(String model) {
     _model = model;
   }
+
   void _getYear(String year) {
     _year = year;
   }
-   void _getKilometer(String kilometer) {
+
+  void _getKilometer(String kilometer) {
     _kilometer = kilometer;
   }
-   void _getPrice(String price) {
+
+  void _getPrice(String price) {
     _price = price;
   }
-   void _getDescription(String description) {
+
+  void _getDescription(String description) {
     _description = description;
   }
+
   void _getEngine(String engine) {
     _engine = engine;
   }
-  void _getPower(String power) {
-    _power = power;
+
+  void _getColor(String color) {
+    _color = color;
   }
+
   void _getImagePath(String imagePath) {
     _imagePath = imagePath;
   }
-  
-  void _saveForm() {
-    if(_formKey.currentState!.validate()) {
-       
+
+  Future<bool> _saveForm() async {
+    if (_imagePath.isEmpty == true) {
+      ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(content: Text("Please select an image")),
+        );
+      return false;
     }
+    if (_formKey.currentState!.validate()) {
+      developer.log(
+        "FORM VALIDE $_brand $_imagePath $_model $_price $_kilometer $_color $_year $_description $_engine",
+      );
+      final Car carToAdd = Car(
+        brand: _brand,
+        image: _imagePath,
+        model: _model,
+        price: _price,
+        km: _kilometer,
+        color: _color,
+        year: _year,
+        details: _description,
+        engine: _engine,
+      );
+      final CarsList carList = context.read<CarsList>();
+      final UserReturn response = await carList.addItemInCarList(carToAdd);
+      return response.status;
+    }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add car sale'),
+        title: const Text('Add new car to sell'),
       ),
       body: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: PickImageCarSale(callback: _getImagePath),
-              ),
-              TextFormFieldCarSale(labelText: "Brand", maxLines: 1, textInputType: TextInputType.text, callback: _getBrand),
-              TextFormFieldCarSale(labelText: "Model", maxLines: 1, textInputType: TextInputType.text, callback: _getModel),
-              TextFormFieldCarSale(labelText: "Price", maxLines: 1, textInputType: TextInputType.number, callback: _getPrice),
-              TextFormFieldCarSale(labelText: "Year", maxLines: 1, textInputType: TextInputType.number, callback: _getYear),
-              TextFormFieldCarSale(labelText: "Kilometer", maxLines: 1, textInputType: TextInputType.number, callback: _getKilometer),
-              TextFormFieldCarSale(labelText: "Power", maxLines: 1, textInputType: TextInputType.number, callback: _getPower),
-              TextFormFieldCarSale(labelText: "Engine", maxLines: 1, textInputType: TextInputType.text, callback: _getEngine),
-              TextFormFieldCarSale(labelText: "Description", maxLines: 5, textInputType: TextInputType.text, callback: _getDescription),
-              const SizedBox(
-                height: 30,
-              ),
-              ElevatedButton.icon(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: PickImageCarSale(callback: _getImagePath),
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Brand",
+                  maxLines: 1,
+                  textInputType: TextInputType.text,
+                  callback: _getBrand,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Model",
+                  maxLines: 1,
+                  textInputType: TextInputType.text,
+                  callback: _getModel,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Price",
+                  maxLines: 1,
+                  textInputType: TextInputType.number,
+                  callback: _getPrice,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Year",
+                  maxLines: 1,
+                  textInputType: TextInputType.number,
+                  callback: _getYear,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Kilometer",
+                  maxLines: 1,
+                  textInputType: TextInputType.number,
+                  callback: _getKilometer,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Color",
+                  maxLines: 1,
+                  textInputType: TextInputType.text,
+                  callback: _getColor,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Engine",
+                  maxLines: 1,
+                  textInputType: TextInputType.text,
+                  callback: _getEngine,
+                ),
+                TextFormFieldCarSale(
+                  labelText: "Description",
+                  maxLines: 5,
+                  textInputType: TextInputType.text,
+                  callback: _getDescription,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton.icon(
                   onPressed: _saveForm,
                   icon: const Icon(Icons.save),
-                  label: const Text('Publish'),),
-            ],
+                  label: const Text('Publish'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }

@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/model/user_return.dart';
 
-class CarsList {
+class CarsList extends ChangeNotifier {
   CarsList();
+  CarsList.fromDatabase() {
+    getCarListFromDatabase();
+  }
   CarsList.fromJSON(List<dynamic> jsonCarList)
       : _carsList = List<Car>.from(
           jsonCarList.map<Car>(
@@ -14,14 +19,76 @@ class CarsList {
 
   void setCarList(List<Car> newCarList) {
     _carsList = newCarList;
+    notifyListeners();
   }
 
   List<Car> getCarsList() {
     return _carsList;
   }
 
-  bool addItemInCarList(Car newItemToAdd) {
-    return false;
+  Future<bool> getCarListFromDatabase() async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> carDocument =
+          await database.collection("Advertisement").doc("Advertisement").get();
+      if (carDocument.data()?.isEmpty == false) {
+        final List<dynamic> carFromDatabase = carDocument.get("Advertisements");
+        setCarList(
+          List<Car>.from(
+            carFromDatabase.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+          ),
+        );
+        notifyListeners();
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  Future<UserReturn> addCarInUserCarSalesList() async {
+    try {
+      return const UserReturn(status: true, message: "Car added in User Sales");
+    } catch (error) {
+      return const UserReturn(
+        status: false,
+        message: "Car NOT added in User Sales",
+      );
+    }
+  }
+
+  Future<UserReturn> addItemInCarList(Car newItemToAdd) async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> carDocument =
+          await database.collection("Advertisement").doc("Advertisement").get();
+      if (carDocument.data()?.isEmpty == false) {
+        final List<dynamic> carListDb = carDocument.get("Advertisements");
+        carListDb.add(newItemToAdd.toJSON());
+        await database
+            .collection("Advertisement")
+            .doc("Advertisement")
+            .update(<String, dynamic>{"Advertisements": carListDb});
+      } else {
+        await database
+            .collection("Advertisement")
+            .doc("Advertisement")
+            .set(<String, dynamic>{
+          "Advertisements": <dynamic>[newItemToAdd.toJSON()]
+        });
+      }
+      await getCarListFromDatabase();
+      return const UserReturn(
+        status: true,
+        message: "Car added successfully",
+      );
+    } catch (error) {
+      return const UserReturn(
+        status: false,
+        message: "Failed to add car in the list",
+      );
+    }
   }
 
   Future<bool> addItemInFavorites(Car newFavoriteCar, String userEmail) async {

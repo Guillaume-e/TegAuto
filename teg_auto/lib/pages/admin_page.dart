@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
 
-// ignore: always_specify_types
-const List<Car> data = [
+const List<Car> data = <Car>[
   Car(
     image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
     brand: "Bmw",
@@ -85,17 +84,19 @@ class _AdminPageState extends State<AdminPage> {
                 margin: const EdgeInsets.only(top: 10),
                 width: 250,
                 decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(50)),
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(50),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const <Widget>[
                     Icon(Icons.block, color: Colors.black, size: 30),
                     Center(
-                        child: Text(
-                      "Ban",
-                      style: TextStyle(fontSize: 22),
-                    )),
+                      child: Text(
+                        "Ban",
+                        style: TextStyle(fontSize: 22),
+                      ),
+                    ),
                   ],
                 ),
               ),
