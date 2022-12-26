@@ -25,7 +25,6 @@ class _AddCarSaleState extends State<AddCarSale> {
   late String _engine = "";
   late String _color = "";
   late String _imagePath = "";
-  // ItemCard car = new ItemCard(image: image, brand: brand, model: model, price: price, km: km, color: color, state: state, details: details);
 
   void _getBrand(String brand) {
     _brand = brand;

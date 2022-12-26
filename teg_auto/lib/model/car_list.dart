@@ -38,6 +38,7 @@ class CarsList extends ChangeNotifier {
             carFromDatabase.map<Car>((dynamic elem) => Car.fromJSON(elem)),
           ),
         );
+        notifyListeners();
         return true;
       }
       return false;
@@ -66,7 +67,7 @@ class CarsList extends ChangeNotifier {
           "Advertisements": <dynamic>[newItemToAdd.toJSON()]
         });
       }
-      notifyListeners();
+      await getCarListFromDatabase();
       return const UserReturn(
         status: true,
         message: "Car added successfully",

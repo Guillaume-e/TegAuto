@@ -15,8 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final CarsList dataList = context.watch<CarsList>();
-
     return Scaffold(
       floatingActionButton: ElevatedButton(
         onPressed: () {
@@ -36,19 +34,23 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
         decoration: const BoxDecoration(color: Colors.grey),
-        child: GridView.builder(
-          itemCount: dataList.getCarsList().length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            mainAxisSpacing: 50,
-          ),
-          itemBuilder: (
-            BuildContext context,
-            int index,
-          ) {
-            return HomeCard(
-              card: dataList.getCarsList()[index],
-              index: index,
+        child: Consumer<CarsList>(
+          builder: (BuildContext context, CarsList value, Widget? child) {
+            return GridView.builder(
+              itemCount: value.getCarsList().length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+                mainAxisSpacing: 50,
+              ),
+              itemBuilder: (
+                BuildContext context,
+                int index,
+              ) {
+                return HomeCard(
+                  card: value.getCarsList()[index],
+                  index: index,
+                );
+              },
             );
           },
         ),
