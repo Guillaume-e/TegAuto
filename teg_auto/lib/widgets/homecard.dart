@@ -87,19 +87,17 @@ class _HomeCardState extends State<HomeCard> {
             Positioned(
               bottom: 33,
               left: 15,
-              child: InfoDisplay(text: "${widget.card.km} km"),
+              child: InfoDisplay(text: "${widget.card.km} km", height: 35, width: 90, fontSize: 22,),
             ),
             Positioned(
               bottom: 33,
               left: 130,
-              child: InfoDisplay(
-                text: widget.card.color,
-              ),
+              child: InfoDisplay(text: widget.card.color, height: 35, width: 90, fontSize: 22,),
             ),
             Positioned(
               bottom: 33,
               right: 15,
-              child: InfoDisplay(text: widget.card.state),
+              child: InfoDisplay(text: widget.card.state, height: 35, width: 90, fontSize: 22,),
             )
           ],
         ),

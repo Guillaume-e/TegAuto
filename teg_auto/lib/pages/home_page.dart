@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/itemcard.dart';
 import 'package:teg_auto/widgets/homecard.dart';
+import 'package:teg_auto/widgets/homecardvar.dart';
 
 // ignore: always_specify_types
 const List<ItemCard> data = [
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(color: Colors.grey),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth > 600) {
+            if (constraints.maxWidth > 900) {
               return GridView.builder(
                 itemCount: data.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 50,
                     crossAxisSpacing: 50),
                 itemBuilder: (BuildContext context, int index) {
-                  return HomeCard(card: data[index], index: index);
+                  return HomeCardVar(card: data[index], index: index);
                 },
               );
             }
