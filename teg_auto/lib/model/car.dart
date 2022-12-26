@@ -25,6 +25,18 @@ class Car {
     );
   }
 
+  Map<String, dynamic> toJSON() => <String, dynamic>{
+        "Image": image,
+        "Brand": brand,
+        "Model": model,
+        "Price": price,
+        "Km": km,
+        "Color": color,
+        "Year": year,
+        "Details": details,
+        "Engine": engine
+      };
+
   final String image;
   final String brand;
   final String model;

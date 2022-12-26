@@ -18,18 +18,21 @@ class VehiculeCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       height: size.height * 0.18,
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(width: 2)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(width: 2),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(card.image,
-                fit: BoxFit.cover,
-                width: size.width * 0.38,
-                height: size.height * 0.16),
+            child: Image.network(
+              card.image,
+              fit: BoxFit.cover,
+              width: size.width * 0.38,
+              height: size.height * 0.16,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -55,9 +58,10 @@ class VehiculeCard extends StatelessWidget {
                   Text(
                     "${card.price} €",
                     style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

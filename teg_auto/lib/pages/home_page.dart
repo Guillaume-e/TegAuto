@@ -1,48 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/car.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
-
-// ignore: always_specify_types
-const List<Car> data = [
-  Car(
-    image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
-    brand: "Bmw",
-    model: "M8 Competition",
-    price: "100000",
-    km: "10",
-    color: "Blue",
-    year: "New",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
-    engine: "6 cylindres",
-  ),
-  Car(
-    image:
-        "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
-    brand: "Porsche",
-    model: "911 GT3 RS",
-    price: "90000",
-    km: "30K",
-    color: "Green",
-    year: "Used",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
-    engine: "6 cylindres",
-  ),
-  Car(
-    image: "assets/images/MANHART-Urus-800-Website-3.jpg",
-    brand: "Lamborghini",
-    model: "Urus",
-    price: "190000",
-    km: "0",
-    color: "Yellow",
-    year: "New",
-    details:
-        "Dans les textes non linéaires, généralement tabulaires, il est difficile de parler de paragraphes : la page est composée de tables ou de tableaux, de graphes et d'histogrammes, d'images (de photographies, de dessins, ou de schémas, etc.), où les informations textuelles figurent dans des pavés de type légende, commentaire, note, etc., chaque segment de texte étant plus ou moins indépendant des autres, et rattaché à un élément non textuel. Il vaut mieux dans ce cas parler de pavé(s), et envisager la composition du document sous l'angle de la topologie (de la mise en page(s))",
-    engine: "6 cylindres",
-  )
-];
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -55,6 +15,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final CarsList dataList = context.watch<CarsList>();
+
     return Scaffold(
       floatingActionButton: ElevatedButton(
         onPressed: () {
@@ -75,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: const BoxDecoration(color: Colors.grey),
         child: GridView.builder(
-          itemCount: data.length,
+          itemCount: dataList.getCarsList().length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
             mainAxisSpacing: 50,
@@ -84,7 +46,10 @@ class _HomePageState extends State<HomePage> {
             BuildContext context,
             int index,
           ) {
-            return HomeCard(card: data[index], index: index);
+            return HomeCard(
+              card: dataList.getCarsList()[index],
+              index: index,
+            );
           },
         ),
       ),
