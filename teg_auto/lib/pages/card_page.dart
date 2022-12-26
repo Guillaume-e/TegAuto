@@ -45,8 +45,9 @@ class _CardPageState extends State<CardPage> {
               right: size.width * 0.1,
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(100)),
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(100),
+                ),
                 height: size.height * 0.08,
                 width: size.height * 0.08,
                 child: const FavoriteButton(),
@@ -55,9 +56,13 @@ class _CardPageState extends State<CardPage> {
             Positioned(
               top: size.height * 0.3,
               left: size.height * 0.03,
-              child: Text(widget.data.brand,
-                  style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold)),
+              child: Text(
+                widget.data.brand,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             Positioned(
               top: size.height * 0.35,
