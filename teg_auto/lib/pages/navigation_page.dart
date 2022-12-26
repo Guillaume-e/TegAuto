@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/pages/admin_page.dart';
 import 'package:teg_auto/pages/home_page.dart';
 import 'package:teg_auto/pages/profil_page.dart';
@@ -12,7 +14,6 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   int _selectedIndex = 0;
-  final bool _isAdmin = true;
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
     ProfilPage(title: "Profil"),
@@ -61,7 +62,7 @@ class _NavigationPageState extends State<NavigationPage> {
               child: const Icon(Icons.person),
             ),
           ),
-          if (_isAdmin == true)
+          if (context.watch<UserManagement>().getIsAdminStatus() == true)
             BottomNavigationBarItem(
               icon: const Icon(Icons.shield),
               label: 'Admin',
