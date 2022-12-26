@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
+import 'package:teg_auto/widgets/homecardvar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -34,24 +35,51 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
       body: Container(
         decoration: const BoxDecoration(color: Colors.grey),
-        child: Consumer<CarsList>(
-          builder: (BuildContext context, CarsList allCar, Widget? child) {
-            return GridView.builder(
-              itemCount: allCar.getCarsList().length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                mainAxisSpacing: 50,
-              ),
-              itemBuilder: (
-                BuildContext context,
-                int index,
-              ) {
-                return HomeCard(
-                  card: allCar.getCarsList()[index],
-                  index: index,
-                );
-              },
-            );
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth > 900) {
+              return Consumer<CarsList>(
+                builder: (BuildContext context, CarsList value, Widget? child) {
+                  return GridView.builder(
+                    itemCount: value.getCarsList().length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 50,
+                      crossAxisSpacing: 50,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return HomeCardVar(
+                        card: value.getCarsList()[index],
+                        index: index,
+                      );
+                    },
+                  );
+                },
+              );
+            } else {
+              return Consumer<CarsList>(
+                builder: (BuildContext context, CarsList value, Widget? child) {
+                  return GridView.builder(
+                    itemCount: value.getCarsList().length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      mainAxisSpacing: 35,
+                    ),
+                    itemBuilder: (
+                      BuildContext context,
+                      int index,
+                    ) {
+                      return HomeCard(
+                        card: value.getCarsList()[index],
+                        index: index,
+                      );
+                    },
+                  );
+                },
+              );
+            }
           },
         ),
       ),
