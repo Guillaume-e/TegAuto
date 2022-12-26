@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/widgets/admin_list.dart';
 
 const List<Car> data = <Car>[
   Car(
@@ -52,10 +53,9 @@ class _AdminPageState extends State<AdminPage> {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
-      body: Container(
-        decoration: const BoxDecoration(color: Colors.white),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: ListView(
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(5),
@@ -117,6 +117,11 @@ class _AdminPageState extends State<AdminPage> {
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
+            ),
+            SizedBox(
+              width: size.width * 0.5,
+              height: size.height * 0.4,
+              child: const AdminList(title: "sales list"),
             ),
           ],
         ),
