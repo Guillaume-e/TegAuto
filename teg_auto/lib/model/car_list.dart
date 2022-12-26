@@ -47,6 +47,17 @@ class CarsList extends ChangeNotifier {
     }
   }
 
+  Future<UserReturn> addCarInUserCarSalesList() async {
+    try {
+      return const UserReturn(status: true, message: "Car added in User Sales");
+    } catch (error) {
+      return const UserReturn(
+        status: false,
+        message: "Car NOT added in User Sales",
+      );
+    }
+  }
+
   Future<UserReturn> addItemInCarList(Car newItemToAdd) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;

@@ -35,9 +35,9 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: const BoxDecoration(color: Colors.grey),
         child: Consumer<CarsList>(
-          builder: (BuildContext context, CarsList value, Widget? child) {
+          builder: (BuildContext context, CarsList allCar, Widget? child) {
             return GridView.builder(
-              itemCount: value.getCarsList().length,
+              itemCount: allCar.getCarsList().length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: 50,
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 int index,
               ) {
                 return HomeCard(
-                  card: value.getCarsList()[index],
+                  card: allCar.getCarsList()[index],
                   index: index,
                 );
               },
