@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/widgets/user_card.dart';
 
 class BanCard extends StatefulWidget {
-
   const BanCard({
     Key? key,
     required this.listCard,
-
   }) : super(key: key);
   final List<List<String>> listCard;
 

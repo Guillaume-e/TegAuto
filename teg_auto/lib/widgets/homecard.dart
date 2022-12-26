@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/itemcard.dart';
+import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/pages/card_page.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
@@ -8,7 +8,7 @@ import 'package:teg_auto/widgets/info_display.dart';
 class HomeCard extends StatefulWidget {
   const HomeCard({super.key, required this.card, required this.index});
 
-  final ItemCard card;
+  final Car card;
   final int index;
 
   @override
@@ -87,17 +87,32 @@ class _HomeCardState extends State<HomeCard> {
             Positioned(
               bottom: 33,
               left: 15,
-              child: InfoDisplay(text: "${widget.card.km} km", height: 35, width: 90, fontSize: 22,),
+              child: InfoDisplay(
+                text: "${widget.card.km} km",
+                height: 35,
+                width: 90,
+                fontSize: 22,
+              ),
             ),
             Positioned(
               bottom: 33,
               left: 130,
-              child: InfoDisplay(text: widget.card.color, height: 35, width: 90, fontSize: 22,),
+              child: InfoDisplay(
+                text: widget.card.color,
+                height: 35,
+                width: 90,
+                fontSize: 22,
+              ),
             ),
             Positioned(
               bottom: 33,
               right: 15,
-              child: InfoDisplay(text: widget.card.state, height: 35, width: 90, fontSize: 22,),
+              child: InfoDisplay(
+                text: widget.card.year,
+                height: 35,
+                width: 90,
+                fontSize: 22,
+              ),
             )
           ],
         ),

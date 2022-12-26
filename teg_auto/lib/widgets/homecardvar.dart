@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/itemcard.dart';
+import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/pages/card_page.dart';
 import 'package:teg_auto/widgets/favoritebutton.dart';
 import 'package:teg_auto/widgets/imagehero.dart';
@@ -8,7 +8,7 @@ import 'package:teg_auto/widgets/info_display.dart';
 class HomeCardVar extends StatefulWidget {
   const HomeCardVar({super.key, required this.card, required this.index});
 
-  final ItemCard card;
+  final Car card;
   final int index;
 
   @override
@@ -97,11 +97,27 @@ class _HomeCardVarState extends State<HomeCardVar> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <InfoDisplay>[
-                  InfoDisplay(text: "${widget.card.km} km", height: size.width * 0.045, width: size.width * 0.07, fontSize: size.width * 0.018),
-                  InfoDisplay(text: widget.card.color, height: size.width * 0.045, width: size.width * 0.07, fontSize: size.width * 0.018),
-                  InfoDisplay(text: widget.card.state, height: size.width * 0.045, width: size.width * 0.07, fontSize: size.width * 0.018)
+                  InfoDisplay(
+                    text: "${widget.card.km} km",
+                    height: size.width * 0.045,
+                    width: size.width * 0.07,
+                    fontSize: size.width * 0.018,
+                  ),
+                  InfoDisplay(
+                    text: widget.card.color,
+                    height: size.width * 0.045,
+                    width: size.width * 0.07,
+                    fontSize: size.width * 0.018,
+                  ),
+                  InfoDisplay(
+                    text: widget.card.year,
+                    height: size.width * 0.045,
+                    width: size.width * 0.07,
+                    fontSize: size.width * 0.018,
+                  )
                 ],
-              ),),
+              ),
+            ),
           ],
         ),
       ),
