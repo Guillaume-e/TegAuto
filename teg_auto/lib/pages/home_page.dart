@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/pages/add_car_sale_page.dart';
 import 'package:teg_auto/widgets/homecard.dart';
@@ -14,6 +15,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void initialiseCarList() async {
+    final CarsList carListRef = context.read<CarsList>();
+    final List<Car> allCarList = await carListRef.getCarListFromDatabase();
+    carListRef.setCarList(allCarList);
+  }
+
+  @override
+  void initState() {
+    initialiseCarList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

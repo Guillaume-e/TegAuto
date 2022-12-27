@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
 
 class SaleCard extends StatefulWidget {
@@ -16,14 +17,22 @@ class SaleCard extends StatefulWidget {
 }
 
 class _SaleCardState extends State<SaleCard> {
-  void removeCarManagement(Car carToRemove) {
+  void removeCarManagement(Car carToRemove) async {
+    final ScaffoldMessengerState scaffoldUserMessage =
+        ScaffoldMessenger.of(context);
     final UserManagement connectedUser = context.read<UserManagement>();
+    late UserReturn removeResponse;
     if (widget.isSellList == true) {
-      connectedUser.removeSellCar(carToRemove);
+      removeResponse = await connectedUser.removeSellCar(carToRemove);
       connectedUser.retrieveSellCar();
     } else {
-      context.read<UserManagement>().removeFavoriteCar(carToRemove);
+      removeResponse = await connectedUser.removeFavoriteCar(carToRemove);
     }
+    scaffoldUserMessage
+      ..removeCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(removeResponse.message)),
+      );
   }
 
   @override

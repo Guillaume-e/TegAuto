@@ -11,11 +11,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // create: (_) => CarsList.fromDatabase(),
   runApp(
     MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
-        ChangeNotifierProvider<UserManagement>(create: (_) => UserManagement()),
-        ChangeNotifierProvider<CarsList>(create: (_) => CarsList.fromDatabase())
+        ChangeNotifierProvider<CarsList>(create: (_) => CarsList()),
+        ChangeNotifierProvider<UserManagement>(create: (_) => UserManagement())
       ],
       child: const MyApp(),
     ),

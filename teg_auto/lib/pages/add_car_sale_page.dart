@@ -89,6 +89,8 @@ class _AddCarSaleState extends State<AddCarSale> {
       final UserReturn response =
           await carList.addItemInCarList(carToAdd, connectedUser.getEmail());
       connectedUser.retrieveSellCar();
+      final List<Car> allCars = await carList.getCarListFromDatabase();
+      carList.setCarList(allCars);
       return response.status;
     }
     return false;

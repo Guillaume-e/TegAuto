@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,9 @@ import 'package:teg_auto/model/user_return.dart';
 
 class CarsList extends ChangeNotifier {
   CarsList();
-  CarsList.fromDatabase() {
-    getCarListFromDatabase();
-  }
+  // CarsList.fromDatabase() {
+  //   final List<Car> allCars = getCarListFromDatabase();
+  // }
   CarsList.fromJSON(List<dynamic> jsonCarList)
       : _carsList = List<Car>.from(
           jsonCarList.map<Car>(
@@ -48,23 +49,21 @@ class CarsList extends ChangeNotifier {
     }
   }
 
-  Future<bool> getCarListFromDatabase() async {
+  Future<List<Car>> getCarListFromDatabase() async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> carDocument =
           await database.collection("Advertisement").doc("Advertisement").get();
       if (carDocument.data()?.isEmpty == false) {
         final List<dynamic> carFromDatabase = carDocument.get("Advertisements");
-        setCarList(
-          List<Car>.from(
-            carFromDatabase.map<Car>((dynamic elem) => Car.fromJSON(elem)),
-          ),
+        final List<Car> allCarList = List<Car>.from(
+          carFromDatabase.map<Car>((dynamic elem) => Car.fromJSON(elem)),
         );
-        return true;
+        return allCarList;
       }
-      return false;
+      return <Car>[];
     } catch (error) {
-      return false;
+      return <Car>[];
     }
   }
 
@@ -113,12 +112,9 @@ class CarsList extends ChangeNotifier {
       }
       final UserReturn userListAdd =
           await addCarInUserCarSalesList(newItemToAdd, email);
-      if (userListAdd.status == true) {
-        await getCarListFromDatabase();
-        return userListAdd;
-      } else {
-        return userListAdd;
-      }
+      notifyListeners();
+      // if (userListAdd.status == true) await getCarListFromDatabase();
+      return userListAdd;
     } catch (error) {
       return const UserReturn(
         status: false,
@@ -146,7 +142,8 @@ class CarsList extends ChangeNotifier {
         "CarsToSell": convertCarListToJSON(userAllSellCar)
       });
       final UserReturn response = await removeItemInCarList(itemToRemove);
-      if (response.status == true) await getCarListFromDatabase();
+      notifyListeners();
+      // if (response.status == true) await getCarListFromDatabase();
       return response;
     } catch (error) {
       developer.log("FAILED");
