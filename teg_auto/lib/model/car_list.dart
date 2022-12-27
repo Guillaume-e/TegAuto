@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
@@ -22,8 +23,29 @@ class CarsList extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<dynamic> convertCarListToJSON(List<Car> listToConvert) {
+    final List<dynamic> transformedList =
+        List<dynamic>.from(listToConvert.map((Car e) => e.toJSON()));
+    return transformedList;
+  }
+
   List<Car> getCarsList() {
     return _carsList;
+  }
+
+  Future<List<Car>> getUserCarListFromDatabase(String email) async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await database.collection("Users").doc(email).get();
+      final List<dynamic> userSellCar = userDoc.get("CarsToSell");
+      final List<Car> userCarList = List<Car>.from(
+        userSellCar.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+      );
+      return userCarList;
+    } catch (error) {
+      return <Car>[];
+    }
   }
 
   Future<bool> getCarListFromDatabase() async {
@@ -38,7 +60,6 @@ class CarsList extends ChangeNotifier {
             carFromDatabase.map<Car>((dynamic elem) => Car.fromJSON(elem)),
           ),
         );
-        notifyListeners();
         return true;
       }
       return false;
@@ -47,18 +68,30 @@ class CarsList extends ChangeNotifier {
     }
   }
 
-  Future<UserReturn> addCarInUserCarSalesList() async {
+  Future<UserReturn> addCarInUserCarSalesList(
+    Car newCarToSell,
+    String email,
+  ) async {
     try {
-      return const UserReturn(status: true, message: "Car added in User Sales");
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await database.collection("Users").doc(email).get();
+      final List<dynamic> userSellCar = userDoc.get("CarsToSell");
+      userSellCar.add(newCarToSell.toJSON());
+      await database
+          .collection("Users")
+          .doc(email)
+          .update(<String, dynamic>{"CarsToSell": userSellCar});
+      return const UserReturn(status: true, message: "Car added successfully");
     } catch (error) {
       return const UserReturn(
         status: false,
-        message: "Car NOT added in User Sales",
+        message: "Car added in database but not linked with the connected user",
       );
     }
   }
 
-  Future<UserReturn> addItemInCarList(Car newItemToAdd) async {
+  Future<UserReturn> addItemInCarList(Car newItemToAdd, String email) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> carDocument =
@@ -78,16 +111,72 @@ class CarsList extends ChangeNotifier {
           "Advertisements": <dynamic>[newItemToAdd.toJSON()]
         });
       }
-      await getCarListFromDatabase();
-      return const UserReturn(
-        status: true,
-        message: "Car added successfully",
-      );
+      final UserReturn userListAdd =
+          await addCarInUserCarSalesList(newItemToAdd, email);
+      if (userListAdd.status == true) {
+        await getCarListFromDatabase();
+        return userListAdd;
+      } else {
+        return userListAdd;
+      }
     } catch (error) {
       return const UserReturn(
         status: false,
         message: "Failed to add car in the list",
       );
+    }
+  }
+
+  Future<UserReturn> removeCarInUserSellList(
+    Car itemToRemove,
+    String email,
+  ) async {
+    try {
+      developer.log("remove sell list");
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await database.collection("Users").doc(email).get();
+      final List<dynamic> userSellDynamic = userDoc.get("CarsToSell");
+      final List<Car> userAllSellCar = List<Car>.from(
+        userSellDynamic.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+      );
+      userAllSellCar
+          .removeWhere((Car element) => element.id == itemToRemove.id);
+      await database.collection("Users").doc(email).update(<String, dynamic>{
+        "CarsToSell": convertCarListToJSON(userAllSellCar)
+      });
+      final UserReturn response = await removeItemInCarList(itemToRemove);
+      if (response.status == true) await getCarListFromDatabase();
+      return response;
+    } catch (error) {
+      developer.log("FAILED");
+      print(error);
+      return const UserReturn(status: false, message: "Car not remove");
+    }
+  }
+
+  Future<UserReturn> removeItemInCarList(Car itemToRemove) async {
+    try {
+      developer.log("remove sell list Général");
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> carDocument =
+          await database.collection("Advertisement").doc("Advertisement").get();
+      final List<dynamic> carListDb = carDocument.get("Advertisements");
+      final List<Car> allSellCar = List<Car>.from(
+        carListDb.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+      );
+      allSellCar.removeWhere((Car element) => element.id == itemToRemove.id);
+      await database
+          .collection("Advertisement")
+          .doc("Advertisement")
+          .update(<String, dynamic>{
+        "Advertisements": convertCarListToJSON(allSellCar)
+      });
+      return const UserReturn(status: true, message: "Car remove successfully");
+    } catch (error) {
+      developer.log("FAILED");
+      print(error);
+      return const UserReturn(status: false, message: "Car not remove");
     }
   }
 
@@ -111,6 +200,7 @@ class CarsList extends ChangeNotifier {
 
   Future<bool> removeItemInFavorites(Car carToDelete, String userEmail) async {
     try {
+      developer.log("remove favorites list");
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> docInfos =
           await database.collection("Users").doc(userEmail).get();

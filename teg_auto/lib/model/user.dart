@@ -68,6 +68,12 @@ class UserManagement extends ChangeNotifier {
     return _favoriteCars.getCarsList();
   }
 
+  void retrieveSellCar() async {
+    final List<Car> carList =
+        await CarsList().getUserCarListFromDatabase(_email);
+    _cars.setCarList(carList);
+  }
+
   Future<UserReturn> addFavoriteCar(Car newFavoriteCar) async {
     final bool addItemReponse =
         await _favoriteCars.addItemInFavorites(newFavoriteCar, _email);
@@ -91,6 +97,12 @@ class UserManagement extends ChangeNotifier {
       );
     }
     return const UserReturn(status: false, message: "Car not removed");
+  }
+
+  Future<UserReturn> removeSellCar(Car carToRemove) async {
+    final UserReturn removeResponse =
+        await _cars.removeCarInUserSellList(carToRemove, _email);
+    return removeResponse;
   }
 
   Future<bool> createUserInDatabase(UserCredential credential) async {

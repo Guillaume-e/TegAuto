@@ -4,6 +4,7 @@ import 'package:teg_auto/widgets/admin_list.dart';
 
 const List<Car> data = <Car>[
   Car(
+    id: "0",
     image: "assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg",
     brand: "Bmw",
     model: "M8 Competition",
@@ -15,6 +16,7 @@ const List<Car> data = <Car>[
     engine: "6 cylindres",
   ),
   Car(
+    id: "1",
     image:
         "assets/images/1-manthey-911-gt3-rs-mr-2020-first-drive-hero-front.jpg",
     brand: "Porsche",
@@ -27,6 +29,7 @@ const List<Car> data = <Car>[
     engine: "6 cylindres",
   ),
   Car(
+    id: "2",
     image: "assets/images/MANHART-Urus-800-Website-3.jpg",
     brand: "Lamborghini",
     model: "Urus",

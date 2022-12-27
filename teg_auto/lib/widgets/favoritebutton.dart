@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import '../assets/images/bmw-m8-coupe-onepager-sp-desktop.jpg' as bmw;
 
 class FavoriteButton extends StatefulWidget {
   const FavoriteButton({
@@ -49,14 +48,18 @@ class _FavoriteButtonState extends State<FavoriteButton>
     super.dispose();
   }
 
+  void manageAnimation() {
+    if (isFavorite == true) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        isFavorite
-            ? _animationController.reverse()
-            : _animationController.forward();
-      },
+      onTap: manageAnimation,
       child: RotationTransition(
         turns: _animationController,
         child: Image.asset(
