@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +15,14 @@ class UserManagement extends ChangeNotifier {
 
   void setName(String newName) {
     _name = newName;
-    // notifyListeners();
   }
 
   void setEmail(String newEmail) {
     _email = newEmail;
-    // notifyListeners();
   }
 
   void setAdminStatus(bool adminStatus) {
     _isAdmin = adminStatus;
-    // notifyListeners();
   }
 
   void setImage(String newImage) async {
@@ -66,8 +62,6 @@ class UserManagement extends ChangeNotifier {
   }
 
   List<Car> getFavoritesUserCars() {
-    developer.log("GET FAVORITE CAR");
-    print(_favoriteCars.getCarsList());
     return _favoriteCars.getCarsList();
   }
 
@@ -114,6 +108,7 @@ class UserManagement extends ChangeNotifier {
   Future<UserReturn> removeFavoriteCar(Car carToRemove) async {
     final UserReturn removeResponse =
         await _favoriteCars.removeItemInFavorites(carToRemove, _email);
+    retrieveFavoriteCar();
     return removeResponse;
   }
 
