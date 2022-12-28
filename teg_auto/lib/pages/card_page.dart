@@ -71,7 +71,6 @@ class _CardPageState extends State<CardPage> {
                   ),
                   SizedBox(
                     width: size.width,
-                    height: size.height * 0.45,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,53 +105,60 @@ class _CardPageState extends State<CardPage> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <InfoDisplay>[
-                                  InfoDisplay(
-                                    text: "${widget.data.km} km",
-                                    height: size.width * 0.045,
-                                    width: size.width * 0.07,
-                                    fontSize: size.width * 0.015,
-                                  ),
-                                  InfoDisplay(
-                                    text: widget.data.color,
-                                    height: size.width * 0.045,
-                                    width: size.width * 0.07,
-                                    fontSize: size.width * 0.015,
-                                  ),
-                                  InfoDisplay(
-                                    text: widget.data.year,
-                                    height: size.width * 0.045,
-                                    width: size.width * 0.07,
-                                    fontSize: size.width * 0.015,
-                                  ),
-                                ],
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <InfoDisplay>[
+                                    InfoDisplay(
+                                      text: "${widget.data.km} km",
+                                      height: size.width * 0.045,
+                                      width: size.width * 0.07,
+                                      fontSize: size.width * 0.015,
+                                    ),
+                                    InfoDisplay(
+                                      text: widget.data.color,
+                                      height: size.width * 0.045,
+                                      width: size.width * 0.07,
+                                      fontSize: size.width * 0.015,
+                                    ),
+                                    InfoDisplay(
+                                      text: widget.data.year,
+                                      height: size.width * 0.045,
+                                      width: size.width * 0.07,
+                                      fontSize: size.width * 0.015,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        const VerticalDivider(
-                          thickness: 5,
-                          color: Colors.black,
+                        SizedBox(
+                          height: size.height * 0.25,
+                          child: const VerticalDivider(
+                            thickness: 3,
+                            color: Colors.blue,
+                          ),
                         ),
                         Column(
                           children: <Widget>[
                             Text(
                               "Details",
                               style: TextStyle(
-                                fontSize: size.width * 0.015,
+                                fontSize: size.width * 0.025,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
-                              height: size.height * 0.4,
-                              width: size.height * 0.5,
+                            Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              width: size.height * 0.4,
                               child: Text(
                                 widget.data.details,
                                 textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: size.width * 0.011),
+                                maxLines: 10,
+                                style: TextStyle(fontSize: size.width * 0.018),
                               ),
                             ),
                           ],
@@ -163,100 +169,118 @@ class _CardPageState extends State<CardPage> {
                 ],
               );
             } else {
-              return Stack(
+              return Column(
                 children: <Widget>[
-                  ImageHero(
-                    tag: "ImageHero${widget.index}",
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    height: size.height * 0.25,
+                  SizedBox(
+                    height: size.height * 0.30,
                     width: size.width,
-                    image: widget.data.image,
-                  ),
-                  Positioned(
-                    top: size.height * 0.2,
-                    right: size.width * 0.1,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      height: size.height * 0.08,
-                      width: size.height * 0.08,
-                      child: const FavoriteButton(),
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.3,
-                    left: size.height * 0.03,
-                    child: Text(
-                      widget.data.brand,
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.35,
-                    left: size.height * 0.02,
-                    child: Text(
-                      widget.data.model,
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.35,
-                    right: size.height * 0.02,
-                    child: Text(
-                      "${widget.data.price} €",
-                      style: const TextStyle(fontSize: 25),
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.43,
-                    left: size.height * 0.02,
-                    child: InfoDisplay(
-                      text: "${widget.data.km} km",
-                      height: 35,
-                      width: 90,
-                      fontSize: 22,
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.43,
-                    left: size.height * 0.22,
-                    child: InfoDisplay(
-                      text: widget.data.color,
-                      height: 35,
-                      width: 90,
-                      fontSize: 22,
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.43,
-                    right: size.height * 0.02,
-                    child: InfoDisplay(
-                      text: widget.data.year,
-                      height: 35,
-                      width: 90,
-                      fontSize: 22,
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * 0.5,
-                    right: size.height * 0.03,
-                    child: const Divider(),
-                  ),
-                  Positioned(
-                    top: size.height * 0.55,
-                    left: size.height * 0.02,
-                    child: SizedBox(
-                      height: size.height * 0.3,
-                    ),
-                  )
-                ],
+                    child: Stack(
+                      children: <Widget>[
+                        ImageHero(
+                          tag: "ImageHero${widget.index}",
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          height: size.height * 0.25,
+                          width: size.width,
+                          image: widget.data.image,
+                        ),
+                        Positioned(
+                          top: size.height * 0.2,
+                          right: size.width * 0.1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            height: size.height * 0.08,
+                            width: size.height * 0.08,
+                            child: const FavoriteButton(),
+                          ),
+                        ),
+                ],),),
+                        Container(
+                          margin: const EdgeInsets.only(left: 5),
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            widget.data.brand,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: size.width * 0.9,
+                            height: size.height * 0.06,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  widget.data.model,
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                                Text(
+                                  "${widget.data.price} €",
+                                  style: const TextStyle(fontSize: 25),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.06,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              InfoDisplay(
+                                text: "${widget.data.km} km",
+                                height: 35,
+                                width: 90,
+                                fontSize: 22,
+                              ),
+                              InfoDisplay(
+                                text: widget.data.color,
+                                height: 35,
+                                width: 90,
+                                fontSize: 22,
+                              ),
+                              InfoDisplay(
+                                text: widget.data.year,
+                                height: 35,
+                                width: 90,
+                                fontSize: 22,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox(
+                            width: size.width * 0.9,
+                            child: const Divider(color: Colors.blue, thickness: 2),),
+                        ),
+                        const Text(
+                          "Details",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                            width: size.width * 0.9,
+                            margin: const EdgeInsets.only(top: 10),
+                            alignment: AlignmentDirectional.centerStart,
+                            child: Text(
+                              widget.data.details,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(fontSize: 22),
+                            ),
+                          ),
+                        ),
+                      ],
               );
             }
           },
