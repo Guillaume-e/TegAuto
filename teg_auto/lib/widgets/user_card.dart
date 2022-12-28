@@ -10,8 +10,19 @@ class UserCard extends StatelessWidget {
   final List<String> card;
   final VoidCallback onPressed;
 
+
   @override
   Widget build(BuildContext context) {
+      Widget buildImage() {
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: card[0] != null ? Image.network(card[0], fit: BoxFit.cover, width: 100, height: 100) : const Icon(Icons.account_circle_rounded, size: 100),
+        
+      ),
+    );
+  }
+
     final Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.all(10),
@@ -25,15 +36,7 @@ class UserCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              card[0],
-              fit: BoxFit.cover,
-              width: size.width * 0.38,
-              height: size.height * 0.16,
-            ),
-          ),
+          buildImage(),
           Text(
             card[1],
             maxLines: 1,
