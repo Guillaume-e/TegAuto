@@ -1,5 +1,6 @@
 class Car {
   const Car({
+    required this.id,
     required this.image,
     required this.brand,
     required this.model,
@@ -13,6 +14,7 @@ class Car {
 
   factory Car.fromJSON(Map<String, dynamic> json) {
     return Car(
+      id: json['Id'],
       image: json['Image'],
       brand: json['Brand'],
       model: json['Model'],
@@ -26,6 +28,7 @@ class Car {
   }
 
   Map<String, dynamic> toJSON() => <String, dynamic>{
+        "Id": id,
         "Image": image,
         "Brand": brand,
         "Model": model,
@@ -37,6 +40,7 @@ class Car {
         "Engine": engine
       };
 
+  final String id;
   final String image;
   final String brand;
   final String model;

@@ -74,53 +74,12 @@ class _ProfilPageState extends State<ProfilPage> {
                         size: 40,
                       ),
                     ),
-                    // body: Column(
-                    //   children: <Widget>[
-                    //     const SizedBox(height: 30),
-                    //     const Material(
-                    //       child: TabBar(
-                    //         labelColor: Colors.black,
-                    //         unselectedLabelColor: Colors.black,
-                    //         indicatorWeight: 1,
-                    //         indicatorColor: Colors.orange,
-                    //         tabs: <Widget>[
-                    //           Tab(
-                    //             text: "Favorites",
-                    //             icon: Icon(
-                    //               Icons.favorite,
-                    //               size: 40,
-                    //             ),
-                    //           ),
-                    //           Tab(
-                    //             icon: Icon(
-                    //               Icons.my_library_books,
-                    //               size: 40,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
                     const Tab(
                       icon: Icon(
                         Icons.my_library_books,
                         size: 40,
                       ),
                     ),
-                    //     Expanded(
-                    //       child: TabBarView(
-                    //         children: <Widget>[
-                    //           SaleCard(
-                    //             listCard: context.watch<UserManagement>().getCarsToSell(),
-                    //           ),
-                    //           SaleCard(
-                    //             listCard: context
-                    //                 .watch<UserManagement>()
-                    //                 .getFavoritesUserCars(),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -134,9 +93,11 @@ class _ProfilPageState extends State<ProfilPage> {
                         listCard: context
                             .watch<UserManagement>()
                             .getFavoritesUserCars(),
+                        isSellList: false,
                       ),
                     SaleCard(
                       listCard: context.watch<UserManagement>().getCarsToSell(),
+                      isSellList: true,
                     ),
                   ],
                 ),
