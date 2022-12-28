@@ -19,7 +19,7 @@ class _InfoDisplayState extends State<InfoDisplay> {
         height: widget.height,
         width: widget.width,
         decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(50)),
-        child: Center(child: Text(widget.text, style: TextStyle(fontSize: widget.fontSize),)),
+        child: Center(child: Text(widget.text, style: TextStyle(fontSize: widget.fontSize), textAlign: TextAlign.center,)),
     );
   }
 }
