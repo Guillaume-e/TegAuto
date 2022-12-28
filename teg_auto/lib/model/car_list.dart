@@ -7,9 +7,6 @@ import 'package:teg_auto/model/user_return.dart';
 
 class CarsList extends ChangeNotifier {
   CarsList();
-  // CarsList.fromDatabase() {
-  //   final List<Car> allCars = getCarListFromDatabase();
-  // }
   CarsList.fromJSON(List<dynamic> jsonCarList)
       : _carsList = List<Car>.from(
           jsonCarList.map<Car>(
@@ -44,6 +41,21 @@ class CarsList extends ChangeNotifier {
         userSellCar.map<Car>((dynamic elem) => Car.fromJSON(elem)),
       );
       return userCarList;
+    } catch (error) {
+      return <Car>[];
+    }
+  }
+
+  Future<List<Car>> getUserFavoriteCarListFromDatabase(String email) async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final DocumentSnapshot<Map<String, dynamic>> userDoc =
+          await database.collection("Users").doc(email).get();
+      final List<dynamic> userSellCar = userDoc.get("FavoritesCars");
+      final List<Car> userFavoriteCar = List<Car>.from(
+        userSellCar.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+      );
+      return userFavoriteCar;
     } catch (error) {
       return <Car>[];
     }
@@ -113,7 +125,6 @@ class CarsList extends ChangeNotifier {
       final UserReturn userListAdd =
           await addCarInUserCarSalesList(newItemToAdd, email);
       notifyListeners();
-      // if (userListAdd.status == true) await getCarListFromDatabase();
       return userListAdd;
     } catch (error) {
       return const UserReturn(
@@ -128,7 +139,6 @@ class CarsList extends ChangeNotifier {
     String email,
   ) async {
     try {
-      developer.log("remove sell list");
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> userDoc =
           await database.collection("Users").doc(email).get();
@@ -143,18 +153,14 @@ class CarsList extends ChangeNotifier {
       });
       final UserReturn response = await removeItemInCarList(itemToRemove);
       notifyListeners();
-      // if (response.status == true) await getCarListFromDatabase();
       return response;
     } catch (error) {
-      developer.log("FAILED");
-      print(error);
       return const UserReturn(status: false, message: "Car not remove");
     }
   }
 
   Future<UserReturn> removeItemInCarList(Car itemToRemove) async {
     try {
-      developer.log("remove sell list Général");
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> carDocument =
           await database.collection("Advertisement").doc("Advertisement").get();
@@ -171,47 +177,61 @@ class CarsList extends ChangeNotifier {
       });
       return const UserReturn(status: true, message: "Car remove successfully");
     } catch (error) {
-      developer.log("FAILED");
-      print(error);
       return const UserReturn(status: false, message: "Car not remove");
     }
   }
 
-  Future<bool> addItemInFavorites(Car newFavoriteCar, String userEmail) async {
+  Future<UserReturn> addItemInFavorites(
+    Car newFavoriteCar,
+    String userEmail,
+  ) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentReference<Map<String, dynamic>> userDoc =
           database.collection("Users").doc(userEmail);
       final DocumentSnapshot<Map<String, dynamic>> docInfos =
           await userDoc.get();
-      final List<Car> favoritesCars = docInfos.get("FavoritesCars");
-      favoritesCars.add(newFavoriteCar);
+      final List<dynamic> favoritesCars = docInfos.get("FavoritesCars");
+      favoritesCars.add(newFavoriteCar.toJSON());
       await userDoc.update(<String, dynamic>{
         "FavoritesCars": favoritesCars,
       });
-      return true;
+      notifyListeners();
+      return const UserReturn(status: true, message: "Car added in favorite");
     } catch (error) {
-      return false;
+      return const UserReturn(
+        status: false,
+        message: "Car not added in favorite",
+      );
     }
   }
 
-  Future<bool> removeItemInFavorites(Car carToDelete, String userEmail) async {
+  Future<UserReturn> removeItemInFavorites(
+    Car carToDelete,
+    String userEmail,
+  ) async {
     try {
-      developer.log("remove favorites list");
       final FirebaseFirestore database = FirebaseFirestore.instance;
       final DocumentSnapshot<Map<String, dynamic>> docInfos =
           await database.collection("Users").doc(userEmail).get();
-      final List<Car> favoriteCar = docInfos.get("FavoritesCars");
-      final bool removeStatus = favoriteCar.remove(carToDelete);
-      if (removeStatus == true) {
-        await database
-            .collection("Users")
-            .doc(userEmail)
-            .update(<String, dynamic>{"FavoritesCars": favoriteCar});
-      }
-      return removeStatus;
+      final List<dynamic> favoriteCarDynamic = docInfos.get("FavoritesCars");
+      final List<Car> userFavCarList = List<Car>.from(
+        favoriteCarDynamic.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+      );
+      userFavCarList.removeWhere((Car element) => element.id == carToDelete.id);
+      await database
+          .collection("Users")
+          .doc(userEmail)
+          .update(<String, dynamic>{
+        "FavoritesCars": convertCarListToJSON(userFavCarList)
+      });
+      notifyListeners();
+      return const UserReturn(status: true, message: "Car remove in favorite");
     } catch (error) {
-      return false;
+      return const UserReturn(
+        status: false,
+        message: "Car not remove in favorite",
+      );
     }
   }
 }

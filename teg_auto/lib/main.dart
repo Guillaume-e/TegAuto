@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // create: (_) => CarsList.fromDatabase(),
+
   runApp(
     MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[

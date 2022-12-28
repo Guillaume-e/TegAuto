@@ -63,7 +63,7 @@ class _CardPageState extends State<CardPage> {
                             ),
                             height: size.height * 0.08,
                             width: size.height * 0.08,
-                            child: const FavoriteButton(),
+                            child: FavoriteButton(carSelected: widget.data),
                           ),
                         ),
                       ],
@@ -184,7 +184,7 @@ class _CardPageState extends State<CardPage> {
                       ),
                       height: size.height * 0.08,
                       width: size.height * 0.08,
-                      child: const FavoriteButton(),
+                      child: FavoriteButton(carSelected: widget.data),
                     ),
                   ),
                   Positioned(

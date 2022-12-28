@@ -27,6 +27,7 @@ class _SaleCardState extends State<SaleCard> {
       connectedUser.retrieveSellCar();
     } else {
       removeResponse = await connectedUser.removeFavoriteCar(carToRemove);
+      connectedUser.retrieveFavoriteCar();
     }
     scaffoldUserMessage
       ..removeCurrentSnackBar()

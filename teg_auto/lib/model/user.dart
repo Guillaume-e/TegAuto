@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,30 @@ class UserManagement extends ChangeNotifier {
   }
 
   List<Car> getFavoritesUserCars() {
+    developer.log("GET FAVORITE CAR");
+    print(_favoriteCars.getCarsList());
     return _favoriteCars.getCarsList();
+  }
+
+  bool isCarFavorite(Car carToCheck) {
+    final List<Car> favoriteList = _favoriteCars.getCarsList();
+    final Car foundElem = favoriteList.firstWhere(
+      (Car element) => element.id == carToCheck.id,
+      orElse: () => const Car(
+        id: "-1",
+        image: "null",
+        brand: "null",
+        model: "null",
+        price: "null",
+        km: "null",
+        color: "null",
+        year: "null",
+        details: "null",
+        engine: "null",
+      ),
+    );
+    if (foundElem.id.compareTo("-1") == 0) return false;
+    return true;
   }
 
   void retrieveSellCar() async {
@@ -74,29 +98,23 @@ class UserManagement extends ChangeNotifier {
     _cars.setCarList(carList);
   }
 
+  void retrieveFavoriteCar() async {
+    final List<Car> favoriteCarList =
+        await CarsList().getUserFavoriteCarListFromDatabase(_email);
+    _favoriteCars.setCarList(favoriteCarList);
+  }
+
   Future<UserReturn> addFavoriteCar(Car newFavoriteCar) async {
-    final bool addItemReponse =
+    final UserReturn addItemReponse =
         await _favoriteCars.addItemInFavorites(newFavoriteCar, _email);
-    if (addItemReponse == true) {
-      notifyListeners();
-      return const UserReturn(
-        status: true,
-        message: "Favorite car added successfully",
-      );
-    }
-    return const UserReturn(status: false, message: "Favorite car not added");
+    retrieveFavoriteCar();
+    return addItemReponse;
   }
 
   Future<UserReturn> removeFavoriteCar(Car carToRemove) async {
-    final bool removeResponse =
+    final UserReturn removeResponse =
         await _favoriteCars.removeItemInFavorites(carToRemove, _email);
-    if (removeResponse == true) {
-      return const UserReturn(
-        status: true,
-        message: "Car remove from favorite",
-      );
-    }
-    return const UserReturn(status: false, message: "Car not removed");
+    return removeResponse;
   }
 
   Future<UserReturn> removeSellCar(Car carToRemove) async {

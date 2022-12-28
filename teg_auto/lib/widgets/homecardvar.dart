@@ -61,7 +61,7 @@ class _HomeCardVarState extends State<HomeCardVar> {
                 ),
                 height: size.height * 0.08,
                 width: size.height * 0.08,
-                child: const FavoriteButton(),
+                child: FavoriteButton(carSelected: widget.card),
               ),
             ),
             Positioned(
