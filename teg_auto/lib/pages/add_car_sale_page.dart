@@ -1,8 +1,8 @@
-import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/car_list.dart';
+import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/widgets/pick_image_car_sale.dart';
 import 'package:teg_auto/widgets/text_form_field_car_sale.dart';
@@ -72,10 +72,8 @@ class _AddCarSaleState extends State<AddCarSale> {
       return false;
     }
     if (_formKey.currentState!.validate()) {
-      developer.log(
-        "FORM VALIDE $_brand $_imagePath $_model $_price $_kilometer $_color $_year $_description $_engine",
-      );
       final Car carToAdd = Car(
+        id: UniqueKey().toString(),
         brand: _brand,
         image: _imagePath,
         model: _model,
@@ -87,7 +85,12 @@ class _AddCarSaleState extends State<AddCarSale> {
         engine: _engine,
       );
       final CarsList carList = context.read<CarsList>();
-      final UserReturn response = await carList.addItemInCarList(carToAdd);
+      final UserManagement connectedUser = context.read<UserManagement>();
+      final UserReturn response =
+          await carList.addItemInCarList(carToAdd, connectedUser.getEmail());
+      connectedUser.retrieveSellCar();
+      final List<Car> allCars = await carList.getCarListFromDatabase();
+      carList.setCarList(allCars);
       return response.status;
     }
     return false;
