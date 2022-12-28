@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/model/user.dart';
 
 class FavoriteButton extends StatefulWidget {
-  const FavoriteButton({
-    Key? key,
-  }) : super(key: key);
+  const FavoriteButton({super.key, required this.carSelected});
+
+  final Car carSelected;
+
   @override
   State<FavoriteButton> createState() => _FavoriteButtonState();
 }
@@ -12,11 +16,13 @@ class _FavoriteButtonState extends State<FavoriteButton>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<dynamic> _colorAnimation;
-  bool isFavorite = false;
+  late bool isFavorite;
 
   @override
   void initState() {
     super.initState();
+    final UserManagement connectedUser = context.read<UserManagement>();
+    isFavorite = connectedUser.isCarFavorite(widget.carSelected);
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -40,6 +46,7 @@ class _FavoriteButtonState extends State<FavoriteButton>
         });
       }
     });
+    if (isFavorite == true) _animationController.forward();
   }
 
   @override
@@ -49,11 +56,15 @@ class _FavoriteButtonState extends State<FavoriteButton>
   }
 
   void manageAnimation() {
+    final UserManagement user = context.read<UserManagement>();
     if (isFavorite == true) {
       _animationController.reverse();
+      user.removeFavoriteCar(widget.carSelected);
     } else {
       _animationController.forward();
+      user.addFavoriteCar(widget.carSelected);
     }
+    user.retrieveFavoriteCar();
   }
 
   @override
