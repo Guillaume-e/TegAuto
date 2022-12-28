@@ -93,9 +93,11 @@ class _ProfilPageState extends State<ProfilPage> {
                         listCard: context
                             .watch<UserManagement>()
                             .getFavoritesUserCars(),
+                        isSellList: false,
                       ),
                     SaleCard(
                       listCard: context.watch<UserManagement>().getCarsToSell(),
+                      isSellList: true,
                     ),
                   ],
                 ),
