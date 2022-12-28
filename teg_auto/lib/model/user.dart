@@ -6,6 +6,13 @@ import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user_return.dart';
 
 class UserManagement extends ChangeNotifier {
+  UserManagement();
+  UserManagement.initialise(String name, String email, String image) {
+    setName(name);
+    setEmail(email);
+    setImage(image);
+  }
+
   String _name = "";
   String _email = "";
   bool _isAdmin = false;
@@ -125,7 +132,10 @@ class UserManagement extends ChangeNotifier {
         "FavoritesCars": <Car>[],
         "CarsToSell": <Car>[],
         "IsAdmin": false,
-        "Uuid": credential.user?.uid
+        "Uuid": credential.user?.uid,
+        "Email": credential.user?.email,
+        "Username": _name,
+        "Userimage": credential.user?.photoURL ?? ""
       };
       await database.collection("Users").doc(_email).set(userData);
       return true;

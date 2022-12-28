@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:teg_auto/model/user.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/user_list.dart';
 
-String image =
-    "https://www.bmw.fr/content/dam/bmw/common/all-models/m-series/m8-coupe/2022/onepager/bmw-m8-coupe-onepager-sp-desktop.jpg";
+class UserCard extends StatefulWidget {
+  const UserCard({Key? key, required this.card}) : super(key: key);
 
-class UserCard extends StatelessWidget {
-  const UserCard({Key? key, required this.card, required this.onPressed})
-      : super(key: key);
-
-  final List<String> card;
-  final VoidCallback onPressed;
-
+  final UserManagement? card;
 
   @override
-  Widget build(BuildContext context) {
-      Widget buildImage() {
-    return ClipOval(
-      child: Material(
-        color: Colors.transparent,
-        child: card[0] != null ? Image.network(card[0], fit: BoxFit.cover, width: 100, height: 100) : const Icon(Icons.account_circle_rounded, size: 100),
-        
-      ),
-    );
-  }
+  State<UserCard> createState() => _UserCardState();
+}
 
-    final Size size = MediaQuery.of(context).size;
+class _UserCardState extends State<UserCard> {
+  @override
+  Widget build(BuildContext context) {
+    Widget buildImage() {
+      return ClipOval(
+        child: Material(
+          color: Colors.transparent,
+          child: widget.card?.getImagePath().isEmpty == false
+              ? Image.network(
+                  widget.card!.getImagePath(),
+                  fit: BoxFit.cover,
+                  width: 100,
+                  height: 100,
+                )
+              : const Icon(Icons.account_circle_rounded, size: 100),
+        ),
+      );
+    }
+
     return Container(
       margin: const EdgeInsets.all(10),
       height: 130,
@@ -38,12 +45,13 @@ class UserCard extends StatelessWidget {
         children: <Widget>[
           buildImage(),
           Text(
-            card[1],
+            widget.card?.getName() ?? "No name",
             maxLines: 1,
             style: const TextStyle(color: Colors.black, fontSize: 16),
           ),
           IconButton(
-            onPressed: onPressed,
+            onPressed: () =>
+                context.read<UserManagementList>().banSelectedUser(widget.card),
             icon: const Icon(
               Icons.cancel,
               color: Colors.black,

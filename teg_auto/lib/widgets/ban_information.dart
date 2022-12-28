@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/model/user_list.dart';
 import 'package:teg_auto/widgets/user_card.dart';
 
 class BanCard extends StatefulWidget {
@@ -15,11 +18,36 @@ class BanCard extends StatefulWidget {
 class _BanCardState extends State<BanCard> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.listCard.length,
-      itemBuilder: (BuildContext context, int index) {
-        final List<String> userCard = widget.listCard[index];
-        return UserCard(card: userCard, onPressed: () => "toto");
+    final UserManagementList managementListRef =
+        context.watch<UserManagementList>();
+    // return ListView.builder(
+    //   itemCount: widget.listCard.length,
+    //   itemBuilder: (BuildContext context, int index) {
+    //     final List<String> userCard = widget.listCard[index];
+    //     return UserCard(card: userCard, onPressed: () => "toto");
+    //   },
+    // );
+    return FutureBuilder<List<UserManagement>>(
+      future: managementListRef.retrieveAllUserInDatabase(),
+      builder: (
+        BuildContext context,
+        AsyncSnapshot<List<UserManagement>> snapshot,
+      ) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data?.length,
+            itemBuilder: (BuildContext context, int index) {
+              // final List<String> userCard = widget.listCard[index];
+              // return UserCard(card: userCard, onPressed: () => "toto");
+              final UserManagement? userCard = snapshot.data?[index];
+              return UserCard(card: userCard);
+            },
+          );
+        } else if (snapshot.hasError) {
+          return const Text("Error in data");
+        } else {
+          return const Text("No data");
+        }
       },
     );
   }
