@@ -89,7 +89,7 @@ class _HomeCardState extends State<HomeCard> {
               left: 15,
               child: InfoDisplay(
                 text: "${widget.card.km} km",
-                height: 35,
+                height: 45,
                 width: 90,
                 fontSize: 22,
               ),
@@ -99,7 +99,7 @@ class _HomeCardState extends State<HomeCard> {
               left: 130,
               child: InfoDisplay(
                 text: widget.card.color,
-                height: 35,
+                height: 45,
                 width: 90,
                 fontSize: 22,
               ),
@@ -109,7 +109,7 @@ class _HomeCardState extends State<HomeCard> {
               right: 15,
               child: InfoDisplay(
                 text: widget.card.year,
-                height: 35,
+                height: 45,
                 width: 90,
                 fontSize: 22,
               ),
