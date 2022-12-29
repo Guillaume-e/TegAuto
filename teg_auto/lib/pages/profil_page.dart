@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user.dart';
+import 'package:teg_auto/model/user_list.dart';
 import 'package:teg_auto/widgets/ban_information.dart';
 import 'package:teg_auto/widgets/profil_widget.dart';
 import 'package:teg_auto/widgets/sale_information.dart';
@@ -88,7 +90,10 @@ class _ProfilPageState extends State<ProfilPage> {
                 child: TabBarView(
                   children: <Widget>[
                     if (isAdmin)
-                      const BanCard(listCard: datauser)
+                      ChangeNotifierProvider<UserManagementList>(
+                        create: (_) => UserManagementList(),
+                        child: const BanCard(listCard: datauser),
+                      ) // const BanCard(listCard: datauser)
                     else
                       SaleCard(
                         listCard: context
@@ -96,10 +101,17 @@ class _ProfilPageState extends State<ProfilPage> {
                             .getFavoritesUserCars(),
                         isSellList: false,
                       ),
-                    SaleCard(
-                      listCard: context.watch<UserManagement>().getCarsToSell(),
-                      isSellList: true,
-                    ),
+                    if (isAdmin)
+                      SaleCard(
+                        listCard: context.watch<CarsList>().getCarsList(),
+                        isSellList: true,
+                      )
+                    else
+                      SaleCard(
+                        listCard:
+                            context.watch<UserManagement>().getCarsToSell(),
+                        isSellList: true,
+                      ),
                   ],
                 ),
               ),
