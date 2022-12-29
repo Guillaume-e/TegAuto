@@ -32,38 +32,45 @@ class VehiculeCard extends StatelessWidget {
               fit: BoxFit.cover,
               width: size.width * 0.38,
               height: size.height * 0.16,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace,) {
+                return const Icon(Icons.car_crash, size: 80);
+              },
             ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                card.brand,
-                maxLines: 1,
-                style: const TextStyle(color: Colors.black, fontSize: 16),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: size.width * 0.4,),
+                child: Text(
+                  card.brand,
+                  maxLines: 1,
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                ),
               ),
-              Text(
-                card.model,
-                maxLines: 1,
-                style: const TextStyle(color: Colors.black, fontSize: 16),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text(
-                    "${card.km} km ",
-                    style: const TextStyle(color: Colors.black, fontSize: 16),
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: size.width * 0.4,),
+                child: Text(
+                  card.model,
+                  maxLines: 1,
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
                   ),
-                  Text(
-                    "${card.price} €",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: size.width * 0.4,),
+                child: Text(
+                  "${card.price} €",
+                   maxLines: 1,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
+                ), 
               ),
             ],
           ),

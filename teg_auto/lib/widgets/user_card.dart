@@ -17,14 +17,12 @@ class UserCard extends StatelessWidget {
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-        child: card[0] != null ? Image.network(card[0], fit: BoxFit.cover, width: 100, height: 100) : const Icon(Icons.account_circle_rounded, size: 100),
+        child: card[0] != "" ? Image.network(card[0], fit: BoxFit.cover, width: 100, height: 100) : const Icon(Icons.account_circle_rounded, size: 100),
         
       ),
     );
   }
-
-    final Size size = MediaQuery.of(context).size;
-    return Container(
+  return Container(
       margin: const EdgeInsets.all(10),
       height: 130,
       width: 200,
