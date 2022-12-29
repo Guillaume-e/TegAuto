@@ -7,11 +7,14 @@ class TextFormFieldCarSale extends StatefulWidget {
     required this.textInputType,
     required this.maxLines,
     required this.callback,
+    required this.maxCharacter,
+    
     
     });
     
     final String? labelText;
     final int maxLines;
+    final int maxCharacter;
     final TextInputType textInputType;
     final void Function(String)? callback;
 
@@ -38,6 +41,7 @@ class _TextFormFieldCarSaleState extends State<TextFormFieldCarSale> {
           return null;
         },
         maxLines: widget.maxLines,
+        maxLength: widget.maxCharacter,
         keyboardType: widget.textInputType,
         decoration: InputDecoration(
           labelText: widget.labelText,

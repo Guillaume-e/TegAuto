@@ -29,6 +29,7 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     final bool isAdmin = context.watch<UserManagement>().getIsAdminStatus();
     return Scaffold(
       appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.blue),
@@ -60,7 +61,7 @@ class _ProfilPageState extends State<ProfilPage> {
           },
           body: Column(
             children: <Widget>[
-              const SizedBox(height: 30),
+              SizedBox(height: size.height * 0.025),
               Material(
                 child: TabBar(
                   labelColor: Colors.black,
