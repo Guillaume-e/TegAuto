@@ -18,27 +18,30 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-  Widget buildName() => Column(
+  
+  Widget buildName(Size size) => Column(
         children: <Widget>[
           Text(
             widget.name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.height * 0.04),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: size.height * 0.015),
           Text(
             widget.email,
-            style: const TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey, fontSize: size.height * 0.02),
           )
         ],
       );
   @override
   Widget build(BuildContext context) {
+        final Size size = MediaQuery.of(context).size;
+
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           PickImage(imagePath: widget.imagePath),
           const SizedBox(height: 24),
-          buildName(),
+          buildName(size),
         ],
     );
   }
