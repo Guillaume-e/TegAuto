@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_return.dart';
+import 'package:teg_auto/widgets/empty_card.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
 
 class SaleCard extends StatefulWidget {
@@ -38,15 +39,21 @@ class _SaleCardState extends State<SaleCard> {
 
   @override
   Widget build(BuildContext context) {
+
     return ListView.builder(
       itemCount: widget.listCard.length,
       itemBuilder: (BuildContext context, int index) {
         final Car vehiculeCard = widget.listCard[index];
+        if (widget.listCard.isEmpty) {
+          return const EmptyCard(text: "You don't have favorite sell");
+        } else {
         return VehiculeCard(
           card: vehiculeCard,
           onPressed: () => removeCarManagement(vehiculeCard),
         );
+        }
       },
     );
   }
 }
+

@@ -33,6 +33,9 @@ class ImageHero extends StatelessWidget {
               child: Image.network(
                 image,
                 fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace,) {
+                return const Icon(Icons.car_crash, size: 100);
+              },
               ),
             ),
           ),
