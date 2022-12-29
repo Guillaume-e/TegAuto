@@ -63,8 +63,9 @@ class _AddCarSaleState extends State<AddCarSale> {
   }
 
   Future<bool> _saveForm() async {
+    final ScaffoldMessengerState scaffoldRef = ScaffoldMessenger.of(context);
     if (_imagePath.isEmpty == true) {
-      ScaffoldMessenger.of(context)
+      scaffoldRef
         ..removeCurrentSnackBar()
         ..showSnackBar(
           const SnackBar(content: Text("Please select an image")),
@@ -91,6 +92,11 @@ class _AddCarSaleState extends State<AddCarSale> {
       connectedUser.retrieveSellCar();
       final List<Car> allCars = await carList.getCarListFromDatabase();
       carList.setCarList(allCars);
+      scaffoldRef
+        ..removeCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(response.message)),
+        );
       return response.status;
     }
     return false;

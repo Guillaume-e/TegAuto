@@ -170,7 +170,13 @@ class CarsList extends ChangeNotifier {
         final List<Car> allUserSellCar = List<Car>.from(
           userCarsToSell.map<Car>((dynamic elem) => Car.fromJSON(elem)),
         );
+        final List<dynamic> userFavoriteCars = elem.get("FavoritesCars");
+        final List<Car> allUserFavoritesCars = List<Car>.from(
+          userFavoriteCars.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+        );
         final int isCarFind = allUserSellCar
+            .indexWhere((Car element) => element.id == itemToRemove.id);
+        final int isCarFavoriteFind = allUserFavoritesCars
             .indexWhere((Car element) => element.id == itemToRemove.id);
         if (isCarFind != -1) {
           allUserSellCar.removeAt(isCarFind);
@@ -180,12 +186,20 @@ class CarsList extends ChangeNotifier {
               .update(<String, dynamic>{
             "CarsToSell": convertCarListToJSON(allUserSellCar)
           });
-          final UserReturn response = await removeItemInCarList(itemToRemove);
-          notifyListeners();
-          return response;
+        }
+        if (isCarFavoriteFind != -1) {
+          allUserFavoritesCars.removeAt(isCarFavoriteFind);
+          await database
+              .collection("Users")
+              .doc(elem.get("Email"))
+              .update(<String, dynamic>{
+            "FavoritesCars": convertCarListToJSON(allUserFavoritesCars)
+          });
         }
       }
-      return const UserReturn(status: false, message: "Car not remove");
+      final UserReturn response = await removeItemInCarList(itemToRemove);
+      notifyListeners();
+      return response;
     } catch (error) {
       return const UserReturn(status: false, message: "Car not remove");
     }
