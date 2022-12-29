@@ -158,6 +158,39 @@ class CarsList extends ChangeNotifier {
     }
   }
 
+  Future<UserReturn> removeCarInUserSellListIfAdmin(Car itemToRemove) async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final QuerySnapshot<Map<String, dynamic>> collectionSnapshot =
+          await database.collection("Users").get();
+      final List<QueryDocumentSnapshot<Map<String, dynamic>>> docList =
+          collectionSnapshot.docs;
+      for (QueryDocumentSnapshot<Map<String, dynamic>> elem in docList) {
+        final List<dynamic> userCarsToSell = elem.get("CarsToSell");
+        final List<Car> allUserSellCar = List<Car>.from(
+          userCarsToSell.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+        );
+        final int isCarFind = allUserSellCar
+            .indexWhere((Car element) => element.id == itemToRemove.id);
+        if (isCarFind != -1) {
+          allUserSellCar.removeAt(isCarFind);
+          await database
+              .collection("Users")
+              .doc(elem.get("Email"))
+              .update(<String, dynamic>{
+            "CarsToSell": convertCarListToJSON(allUserSellCar)
+          });
+          final UserReturn response = await removeItemInCarList(itemToRemove);
+          notifyListeners();
+          return response;
+        }
+      }
+      return const UserReturn(status: false, message: "Car not remove");
+    } catch (error) {
+      return const UserReturn(status: false, message: "Car not remove");
+    }
+  }
+
   Future<UserReturn> removeItemInCarList(Car itemToRemove) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
