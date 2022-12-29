@@ -71,13 +71,14 @@ class _CardPageState extends State<CardPage> {
                   ),
                   SizedBox(
                     width: size.width,
+                    height: size.height * 0.4,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         SizedBox(
-                          width: size.width * 0.35,
-                          height: size.height * 0.25,
+                          width: size.width * 0.45,
+                          height: size.height * 0.35,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,17 +92,27 @@ class _CardPageState extends State<CardPage> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Text>[
-                                  Text(
-                                    widget.data.model,
-                                    style:
-                                        TextStyle(fontSize: size.width * 0.02),
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: size.width * 0.22,
+                                    ),
+                                    child: Text(
+                                      widget.data.model,
+                                      style:
+                                          TextStyle(fontSize: size.width * 0.02),
+                                    ),
                                   ),
-                                  Text(
-                                    "${widget.data.price} €",
-                                    style:
-                                        TextStyle(fontSize: size.width * 0.02),
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      maxWidth: size.width * 0.2,
+                                    ),
+                                    child: Text(
+                                      "${widget.data.price} €",
+                                      style:
+                                          TextStyle(fontSize: size.width * 0.02),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -136,7 +147,7 @@ class _CardPageState extends State<CardPage> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * 0.25,
+                          height: size.height * 0.35,
                           child: const VerticalDivider(
                             thickness: 3,
                             color: Colors.blue,
@@ -152,6 +163,10 @@ class _CardPageState extends State<CardPage> {
                               ),
                             ),
                             Container(
+                              constraints: BoxConstraints(
+                                maxHeight: size.height * 0.3,
+                                maxWidth: size.width * 0.4,
+                              ),
                               margin: const EdgeInsets.only(top: 10),
                               width: size.height * 0.4,
                               child: Text(
@@ -216,17 +231,27 @@ class _CardPageState extends State<CardPage> {
                   Center(
                     child: SizedBox(
                       width: size.width * 0.9,
-                      height: size.height * 0.06,
+                      height: size.height * 0.15,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            widget.data.model,
-                            style: const TextStyle(fontSize: 25),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: size.width * 0.4,
+                            ),
+                            child: Text(
+                              widget.data.model,
+                              style: const TextStyle(fontSize: 22),
+                            ),
                           ),
-                          Text(
-                            "${widget.data.price} €",
-                            style: const TextStyle(fontSize: 25),
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: size.width * 0.45,
+                            ),
+                            child: Text(
+                              "${widget.data.price} €",
+                              style: const TextStyle(fontSize: 22),
+                            ),
                           ),
                         ],
                       ),
@@ -239,21 +264,21 @@ class _CardPageState extends State<CardPage> {
                       children: <Widget>[
                         InfoDisplay(
                           text: "${widget.data.km} km",
-                          height: 35,
-                          width: 90,
-                          fontSize: 22,
+                          height: 55,
+                          width: 110,
+                          fontSize: 20,
                         ),
                         InfoDisplay(
                           text: widget.data.color,
-                          height: 35,
-                          width: 90,
-                          fontSize: 22,
+                          height: 55,
+                          width: 110,
+                          fontSize: 20,
                         ),
                         InfoDisplay(
                           text: widget.data.year,
-                          height: 35,
-                          width: 90,
-                          fontSize: 22,
+                          height: 55,
+                          width: 110,
+                          fontSize: 20,
                         ),
                       ],
                     ),
