@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/pages/authentication/authentication_page.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
