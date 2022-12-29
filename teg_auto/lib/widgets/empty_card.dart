@@ -12,9 +12,11 @@ class EmptyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Container(
+    return Center(
+      child: Container(
       margin: const EdgeInsets.all(10),
-      height: size.height * 0.15,
+      height: size.width < size.height ? size.height * 0.15 : size.height * 0.20,
+      width:  size.width > size.height ? size.width * 0.50 : size.width,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
@@ -29,9 +31,13 @@ class EmptyCard extends StatelessWidget {
           ),
           Text(
             text,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize:  size.height * 0.025,
+            ),
           ),
         ],
       ),
-    );
+    ),);
   }
 }

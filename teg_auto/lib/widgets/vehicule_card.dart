@@ -14,65 +14,66 @@ class VehiculeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Container(
+   
+    return Center(
+      child: Container(
       margin: const EdgeInsets.all(10),
-      height: size.height * 0.18,
+      padding: const EdgeInsets.all(5),
+      height: size.width < size.height ? size.height * 0.18 : size.height * 0.25,
+      width:  size.width > size.height ? size.width * 0.55 : size.width,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         border: Border.all(width: 2),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.network(
               card.image,
               fit: BoxFit.cover,
-              width: size.width * 0.38,
-              height: size.height * 0.16,
+              width: size.width > size.height ? size.width * 0.25 : size.width *0.38,
+              height: size.width > size.height ? size.height *0.8 : size.height * 0.16,
               errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace,) {
-                return const Icon(Icons.car_crash, size: 80);
+                return Icon(Icons.car_crash, size: size.width > size.height ? size.height * 0.15 : size.height * 0.12);
               },
             ),
           ),
+          ConstrainedBox(
+             constraints: BoxConstraints(
+                  maxWidth: size.width > size.height ? size.width * 0.14 : size.width * 0.40,),
+                  child: 
+          
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: size.width * 0.4,),
-                child: Text(
+              Text(
                   card.brand,
                   maxLines: 1,
-                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(color: Colors.black, fontSize: size.height * 0.03),
                 ),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: size.width * 0.4,),
-                child: Text(
+              
+            Text(
                   card.model,
                   maxLines: 1,
-                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(color: Colors.black, fontSize:  size.height * 0.03),
                   ),
-                ),
-                ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: size.width * 0.4,),
-                child: Text(
+                
+                 Text(
                   "${card.price} €",
                    maxLines: 1,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize:  size.height * 0.03,
                     fontWeight: FontWeight.bold,
                   ),
-                ), 
+                
               ),
             ],
+          ),
           ),
           IconButton(
             onPressed: onPressed,
@@ -84,6 +85,8 @@ class VehiculeCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
+  
   }
 }
