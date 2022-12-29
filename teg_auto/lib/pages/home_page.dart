@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(color: Colors.grey),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth > 900) {
+            if (constraints.maxWidth > 1200) {
               return Consumer<CarsList>(
                 builder: (BuildContext context, CarsList value, Widget? child) {
                   if (value.getCarsList().isEmpty) {

@@ -22,14 +22,14 @@ class _HomeCardVarState extends State<HomeCardVar> {
     return Center(
       child: Container(
         constraints: BoxConstraints(
-          maxHeight: size.height * 0.63,
+          maxHeight: size.height * 0.7,
           maxWidth: size.width * 0.40,
         ),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(50),
         ),
-        height: size.height * 0.63,
+        height: size.height * 0.7,
         width: size.width * 0.40,
         child: Column(
           children: <Widget>[
