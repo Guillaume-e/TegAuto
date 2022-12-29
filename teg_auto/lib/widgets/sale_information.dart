@@ -40,20 +40,23 @@ class _SaleCardState extends State<SaleCard> {
   @override
   Widget build(BuildContext context) {
 
+    if (widget.listCard.isEmpty) {
+          return EmptyCard(
+            text: widget.isSellList ? "You don't sell car" : "You don't have favorite sell",);
+        } else {
     return ListView.builder(
       itemCount: widget.listCard.length,
       itemBuilder: (BuildContext context, int index) {
         final Car vehiculeCard = widget.listCard[index];
-        if (widget.listCard.isEmpty) {
-          return const EmptyCard(text: "You don't have favorite sell");
-        } else {
+       
         return VehiculeCard(
           card: vehiculeCard,
           onPressed: () => removeCarManagement(vehiculeCard),
         );
-        }
+        
       },
     );
+        }
   }
 }
 

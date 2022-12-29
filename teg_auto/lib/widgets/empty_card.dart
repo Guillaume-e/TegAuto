@@ -27,7 +27,7 @@ class EmptyCard extends StatelessWidget {
         children: <Widget>[
           const Icon(
             Icons.highlight_off_rounded,
-            size: 70,
+            size: 60,
           ),
           Text(
             text,
