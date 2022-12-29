@@ -26,96 +26,111 @@ class _HomeCardState extends State<HomeCard> {
         ),
         height: 350,
         width: 350,
-        child: Stack(
+        child: Column(
           children: <Widget>[
-            ImageHero(
-              tag: "ImageHero${widget.index}",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<CardPage>(
-                    builder: (BuildContext context) => CardPage(
-                      title: "Details",
-                      data: widget.card,
-                      index: widget.index,
+            SizedBox(
+              height: 240,
+              child: Stack(
+                children: <Widget>[
+                  ImageHero(
+                    tag: "ImageHero${widget.index}",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<CardPage>(
+                          builder: (BuildContext context) => CardPage(
+                            title: "Details",
+                            data: widget.card,
+                            index: widget.index,
+                          ),
+                        ),
+                      );
+                    },
+                    height: 170,
+                    width: 350,
+                    image: widget.card.image,
+                  ),
+                  Positioned(
+                    top: 140,
+                    right: 30,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      height: 57,
+                      width: 57,
+                      child: FavoriteButton(carSelected: widget.card),
                     ),
                   ),
-                );
-              },
-              height: 170,
-              width: 350,
-              image: widget.card.image,
+                  Positioned(
+                    top: 200,
+                    left: 10,
+                    child: Text(
+                      widget.card.brand,
+                      style:
+                          const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],),
             ),
-            Positioned(
-              top: 140,
-              right: 30,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(100),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                width: 330,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 150,
+                      ),
+                      child:  Text(
+                          widget.card.model,
+                          maxLines: 1,
+                          style: const TextStyle(fontSize: 22),
+                      ),
+                    ),
+                    Container(
+                      constraints: const BoxConstraints(
+                        maxWidth: 150,
+                      ),
+                      child:  Text(
+                      "${widget.card.price} €",
+                      maxLines: 1,
+                      style: const TextStyle(fontSize: 22),
+                      ),
+                    ),
+                  ],
                 ),
-                height: 57,
-                width: 57,
-                child: FavoriteButton(carSelected: widget.card),
               ),
-            ),
-            Positioned(
-              bottom: 125,
-              left: 10,
-              child: Text(
-                widget.card.brand,
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    InfoDisplay(
+                      text: "${widget.card.km} km",
+                      height: 45,
+                      width: 90,
+                      fontSize: 18,
+                    ),
+                    InfoDisplay(
+                      text: widget.card.color,
+                      height: 45,
+                      width: 90,
+                      fontSize: 20,
+                    ),
+                    InfoDisplay(
+                      text: widget.card.year,
+                      height: 45,
+                      width: 90,
+                      fontSize: 20,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              bottom: 90,
-              left: 7,
-              child: Text(
-                widget.card.model,
-                style: const TextStyle(fontSize: 25),
-              ),
-            ),
-            Positioned(
-              bottom: 90,
-              right: 7,
-              child: Text(
-                "${widget.card.price} €",
-                style: const TextStyle(fontSize: 25),
-              ),
-            ),
-            Positioned(
-              bottom: 33,
-              left: 15,
-              child: InfoDisplay(
-                text: "${widget.card.km} km",
-                height: 45,
-                width: 90,
-                fontSize: 22,
-              ),
-            ),
-            Positioned(
-              bottom: 33,
-              left: 130,
-              child: InfoDisplay(
-                text: widget.card.color,
-                height: 45,
-                width: 90,
-                fontSize: 22,
-              ),
-            ),
-            Positioned(
-              bottom: 33,
-              right: 15,
-              child: InfoDisplay(
-                text: widget.card.year,
-                height: 45,
-                width: 90,
-                fontSize: 22,
-              ),
-            )
-          ],
-        ),
+            ],
+          ),
       ),
     );
   }
