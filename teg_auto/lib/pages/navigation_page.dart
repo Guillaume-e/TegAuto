@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:teg_auto/model/user.dart';
-import 'package:teg_auto/pages/admin_page.dart';
 import 'package:teg_auto/pages/home_page.dart';
 import 'package:teg_auto/pages/profil_page.dart';
 
@@ -16,8 +13,7 @@ class _NavigationPageState extends State<NavigationPage> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(title: "Home"),
-    ProfilPage(title: "Profil"),
-    AdminPage(title: "Admin")
+    ProfilPage(title: "Profil")
   ];
 
   void _onItemTapped(int index) {
@@ -62,21 +58,6 @@ class _NavigationPageState extends State<NavigationPage> {
               child: const Icon(Icons.person),
             ),
           ),
-          if (context.watch<UserManagement>().getIsAdminStatus() == true)
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.shield),
-              label: 'Admin',
-              backgroundColor: const Color.fromARGB(255, 159, 163, 158),
-              activeIcon: Container(
-                height: 35,
-                width: 75,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.blue,
-                ),
-                child: const Icon(Icons.shield),
-              ),
-            ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,

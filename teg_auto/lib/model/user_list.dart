@@ -26,18 +26,14 @@ class UserManagementList extends ChangeNotifier {
           collectionSnapshot.docs;
       final List<UserManagement> userManagementList = <UserManagement>[];
       for (QueryDocumentSnapshot<Map<String, dynamic>> elem in docList) {
-        if (elem.get("Uuid") == "CBQ5SVsjDnej4JCB61U7m7gixEu2" ||
-            elem.get("Uuid") == "4ZhQrNcIQBZKz1UZYhQ73OIQxjJ2" ||
-            elem.get("Uuid") == "Xdf99QUyibWbzVFm9G6UTMefNfI2") {
-          userManagementList.add(
-            UserManagement.initialise(
-              elem.get("Username"),
-              elem.get("Email"),
-              elem.get("Userimage"),
-              elem.get("IsAdmin"),
-            ),
-          );
-        }
+        userManagementList.add(
+          UserManagement.initialise(
+            elem.get("Username"),
+            elem.get("Email"),
+            elem.get("Userimage"),
+            elem.get("IsAdmin"),
+          ),
+        );
       }
       return userManagementList;
     } catch (error) {
