@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/user_return.dart';
+import 'package:teg_auto/widgets/admin_list.dart';
 
 class CarsList extends ChangeNotifier {
   CarsList();
@@ -158,6 +160,44 @@ class CarsList extends ChangeNotifier {
     }
   }
 
+  Future<UserReturn> removeCarInUserSellListIfAdmin(Car itemToRemove) async {
+    try {
+      final FirebaseFirestore database = FirebaseFirestore.instance;
+      final QuerySnapshot<Map<String, dynamic>> collectionSnapshot =
+          await database.collection("Users").get();
+      final List<QueryDocumentSnapshot<Map<String, dynamic>>> docList =
+          collectionSnapshot.docs;
+      for (QueryDocumentSnapshot<Map<String, dynamic>> elem in docList) {
+        final List<dynamic> userCarsToSell = elem.get("CarsToSell");
+        final List<Car> allUserSellCar = List<Car>.from(
+          userCarsToSell.map<Car>((dynamic elem) => Car.fromJSON(elem)),
+        );
+        final int isCarFind = allUserSellCar
+            .indexWhere((Car element) => element.id == itemToRemove.id);
+        if (isCarFind != -1) {
+          allUserSellCar.removeAt(isCarFind);
+          await database
+              .collection("Users")
+              .doc(elem.get("Email"))
+              .update(<String, dynamic>{
+            "CarsToSell": convertCarListToJSON(allUserSellCar)
+          });
+          developer.log("REMOVE CAR IN ADMIN MODE");
+          final UserReturn response = await removeItemInCarList(itemToRemove);
+          notifyListeners();
+          return response;
+          // return const UserReturn(
+          //   status: false,
+          //   message: "Car removed successfully",
+          // );
+        }
+      }
+      return const UserReturn(status: false, message: "Car not remove");
+    } catch (error) {
+      return const UserReturn(status: false, message: "Car not remove");
+    }
+  }
+
   Future<UserReturn> removeItemInCarList(Car itemToRemove) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
@@ -174,8 +214,10 @@ class CarsList extends ChangeNotifier {
           .update(<String, dynamic>{
         "Advertisements": convertCarListToJSON(allSellCar)
       });
+      developer.log("SUCCESS REMOVE IN CAR LIST");
       return const UserReturn(status: true, message: "Car remove successfully");
     } catch (error) {
+      developer.log("ERROR REMOVE $error");
       return const UserReturn(status: false, message: "Car not remove");
     }
   }

@@ -20,13 +20,6 @@ class _BanCardState extends State<BanCard> {
   Widget build(BuildContext context) {
     final UserManagementList managementListRef =
         context.watch<UserManagementList>();
-    // return ListView.builder(
-    //   itemCount: widget.listCard.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     final List<String> userCard = widget.listCard[index];
-    //     return UserCard(card: userCard, onPressed: () => "toto");
-    //   },
-    // );
     return FutureBuilder<List<UserManagement>>(
       future: managementListRef.retrieveAllUserInDatabase(),
       builder: (
@@ -37,8 +30,6 @@ class _BanCardState extends State<BanCard> {
           return ListView.builder(
             itemCount: snapshot.data?.length,
             itemBuilder: (BuildContext context, int index) {
-              // final List<String> userCard = widget.listCard[index];
-              // return UserCard(card: userCard, onPressed: () => "toto");
               final UserManagement? userCard = snapshot.data?[index];
               return UserCard(card: userCard);
             },

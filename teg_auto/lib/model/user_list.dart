@@ -1,6 +1,4 @@
-import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_return.dart';
@@ -28,34 +26,51 @@ class UserManagementList extends ChangeNotifier {
           collectionSnapshot.docs;
       final List<UserManagement> userManagementList = <UserManagement>[];
       for (QueryDocumentSnapshot<Map<String, dynamic>> elem in docList) {
-        userManagementList.add(
-          UserManagement.initialise(
-            elem.data()["Username"],
-            elem.data()["Email"],
-            elem.data()["Userimage"],
-          ),
-        );
+        if (elem.get("Uuid") == "CBQ5SVsjDnej4JCB61U7m7gixEu2" ||
+            elem.get("Uuid") == "4ZhQrNcIQBZKz1UZYhQ73OIQxjJ2" ||
+            elem.get("Uuid") == "Xdf99QUyibWbzVFm9G6UTMefNfI2") {
+          userManagementList.add(
+            UserManagement.initialise(
+              elem.get("Username"),
+              elem.get("Email"),
+              elem.get("Userimage"),
+              elem.get("IsAdmin"),
+            ),
+          );
+        }
       }
       return userManagementList;
     } catch (error) {
-      developer.log("FAILED");
-      print(error);
       return <UserManagement>[];
     }
   }
 
-  Future<UserReturn> banSelectedUser(UserManagement? userToBan) async {
+  Future<UserReturn> setNewUserToAdmin(UserManagement? userToUpgrade) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
-      final FirebaseAuth authSession = FirebaseAuth.instance;
-      return UserReturn(
-        status: true,
-        message: "User ${userToBan?.getName()} is banned",
-      );
+      if (userToUpgrade?.getIsAdminStatus() == false) {
+        await database
+            .collection("Users")
+            .doc(userToUpgrade?.getEmail())
+            .update(<String, dynamic>{"IsAdmin": true});
+        return UserReturn(
+          status: true,
+          message: "User ${userToUpgrade?.getName()} is now an Admin",
+        );
+      } else {
+        await database
+            .collection("Users")
+            .doc(userToUpgrade?.getEmail())
+            .update(<String, dynamic>{"IsAdmin": false});
+        return UserReturn(
+          status: true,
+          message: "User ${userToUpgrade?.getName()} is not an Admin anymore",
+        );
+      }
     } catch (error) {
       return UserReturn(
         status: true,
-        message: "Failed to ban User ${userToBan?.getName()}",
+        message: "Failed to ban User ${userToUpgrade?.getName()}",
       );
     }
   }

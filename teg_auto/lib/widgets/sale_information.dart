@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/widgets/vehicule_card.dart';
@@ -23,7 +24,13 @@ class _SaleCardState extends State<SaleCard> {
     final UserManagement connectedUser = context.read<UserManagement>();
     late UserReturn removeResponse;
     if (widget.isSellList == true) {
-      removeResponse = await connectedUser.removeSellCar(carToRemove);
+      if (context.read<UserManagement>().getIsAdminStatus() == true) {
+        await context
+            .read<CarsList>()
+            .removeCarInUserSellListIfAdmin(carToRemove);
+      } else {
+        removeResponse = await connectedUser.removeSellCar(carToRemove);
+      }
       connectedUser.retrieveSellCar();
     } else {
       removeResponse = await connectedUser.removeFavoriteCar(carToRemove);

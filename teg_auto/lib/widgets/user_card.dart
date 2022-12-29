@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teg_auto/model/user.dart';
 import 'package:provider/provider.dart';
+import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_list.dart';
 
 class UserCard extends StatefulWidget {
@@ -50,13 +50,20 @@ class _UserCardState extends State<UserCard> {
             style: const TextStyle(color: Colors.black, fontSize: 16),
           ),
           IconButton(
-            onPressed: () =>
-                context.read<UserManagementList>().banSelectedUser(widget.card),
-            icon: const Icon(
-              Icons.cancel,
-              color: Colors.black,
-              size: 50,
-            ),
+            onPressed: () => context
+                .read<UserManagementList>()
+                .setNewUserToAdmin(widget.card),
+            icon: widget.card?.getIsAdminStatus() == true
+                ? const Icon(
+                    Icons.cancel,
+                    color: Colors.black,
+                    size: 50,
+                  )
+                : const Icon(
+                    Icons.add_circle_outline,
+                    color: Colors.black,
+                    size: 50,
+                  ),
           ),
         ],
       ),

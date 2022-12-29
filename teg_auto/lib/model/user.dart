@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,16 @@ import 'package:teg_auto/model/user_return.dart';
 
 class UserManagement extends ChangeNotifier {
   UserManagement();
-  UserManagement.initialise(String name, String email, String image) {
+  UserManagement.initialise(
+    String name,
+    String email,
+    String image,
+    bool adminState,
+  ) {
     setName(name);
     setEmail(email);
     setImage(image);
+    setAdminStatus(adminState);
   }
 
   String _name = "";
