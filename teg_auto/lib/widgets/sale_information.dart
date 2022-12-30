@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teg_auto/model/car.dart';
+import 'package:teg_auto/model/car_list.dart';
 import 'package:teg_auto/model/user.dart';
 import 'package:teg_auto/model/user_return.dart';
 import 'package:teg_auto/widgets/empty_card.dart';
@@ -24,7 +25,13 @@ class _SaleCardState extends State<SaleCard> {
     final UserManagement connectedUser = context.read<UserManagement>();
     late UserReturn removeResponse;
     if (widget.isSellList == true) {
-      removeResponse = await connectedUser.removeSellCar(carToRemove);
+      if (context.read<UserManagement>().getIsAdminStatus() == true) {
+        removeResponse = await context
+            .read<CarsList>()
+            .removeCarInUserSellListIfAdmin(carToRemove);
+      } else {
+        removeResponse = await connectedUser.removeSellCar(carToRemove);
+      }
       connectedUser.retrieveSellCar();
     } else {
       removeResponse = await connectedUser.removeFavoriteCar(carToRemove);
@@ -39,24 +46,24 @@ class _SaleCardState extends State<SaleCard> {
 
   @override
   Widget build(BuildContext context) {
-
     if (widget.listCard.isEmpty) {
-          return EmptyCard(
-            text: widget.isSellList ? "You don't sell car" : "You don't have favorite sell",);
-        } else {
-    return ListView.builder(
-      itemCount: widget.listCard.length,
-      itemBuilder: (BuildContext context, int index) {
-        final Car vehiculeCard = widget.listCard[index];
-       
-        return VehiculeCard(
-          card: vehiculeCard,
-          onPressed: () => removeCarManagement(vehiculeCard),
-        );
-        
-      },
-    );
-        }
+      return EmptyCard(
+        text: widget.isSellList
+            ? "You don't sell car"
+            : "You don't have favorite sell",
+      );
+    } else {
+      return ListView.builder(
+        itemCount: widget.listCard.length,
+        itemBuilder: (BuildContext context, int index) {
+          final Car vehiculeCard = widget.listCard[index];
+
+          return VehiculeCard(
+            card: vehiculeCard,
+            onPressed: () => removeCarManagement(vehiculeCard),
+          );
+        },
+      );
+    }
   }
 }
-
