@@ -52,6 +52,7 @@ Outils version :
     Flutter : 3.3.7+ channel stable
     Xcode : 14.2
     Cocoapods : 1.11.3
+    ios : 16.2
 
 **Sur Xcode**
 Ouvrir le dossier **teg_auto/ios** dans Xcode
