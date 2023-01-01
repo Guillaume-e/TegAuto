@@ -42,6 +42,8 @@ Pour ce projet, nous avons utilisés les libraries externes suivantes:
 Depuis la racine du dossier **teg_auto** :
 * Lancer la commande **flutter doctor** pour voir si tous les packages sont installés avec la bonne version.
 
+* Lancer la commande **flutter clean** entre chaque changement de plateform.
+
 * Lancer la commande **flutter pub get** pour installer les packages nécessaires.
 
 * Choisir un émulateur web, android ou téléphone, taper la commander **flutter run** pour build le projet et lancer l'application sur l'émulateur chosi.
@@ -65,4 +67,4 @@ Depuis la racine du dossier **teg_auto** :
 
 * Lancer la commande **flutter pub get** pour installer les packages nécessaires.
 
-* Choisir un émulateur web, android ou téléphone, taper la commander **flutter run** pour build le projet et lancer 
+* Choisir le simulateur iphone (ios 16.2) , taper la commander **flutter run** pour build le projet et lancer l'application
