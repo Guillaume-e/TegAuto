@@ -73,10 +73,14 @@ class _AddCarSaleState extends State<AddCarSale> {
       return false;
     }
     if (_formKey.currentState!.validate()) {
+      final List<String> split = _imagePath.split('/');
+      final String filename = split[split.length-1];
+      const String filepathFirebase = "https://firebasestorage.googleapis.com/v0/b/tegauto-573df.appspot.com/o/car_sale%2F";
+      const String altmedia = "?alt=media";
       final Car carToAdd = Car(
         id: UniqueKey().toString(),
         brand: _brand,
-        image: _imagePath,
+        image: filepathFirebase+filename+altmedia,
         model: _model,
         price: _price,
         km: _kilometer,
@@ -85,10 +89,12 @@ class _AddCarSaleState extends State<AddCarSale> {
         details: _description,
         engine: _engine,
       );
+      
       final CarsList carList = context.read<CarsList>();
       final UserManagement connectedUser = context.read<UserManagement>();
       final UserReturn response =
           await carList.addItemInCarList(carToAdd, connectedUser.getEmail());
+      await carList.addImageToFirebaseStorage(_imagePath);
       connectedUser.retrieveSellCar();
       final List<Car> allCars = await carList.getCarListFromDatabase();
       carList.setCarList(allCars);

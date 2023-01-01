@@ -24,7 +24,7 @@ class _HomeCardState extends State<HomeCard> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),
-        height: 350,
+        height: 360,
         width: 350,
         child: Column(
           children: <Widget>[

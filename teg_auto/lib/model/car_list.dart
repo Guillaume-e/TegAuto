@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:teg_auto/model/car.dart';
 import 'package:teg_auto/model/user_return.dart';
 
@@ -14,6 +17,7 @@ class CarsList extends ChangeNotifier {
         );
 
   List<Car> _carsList = <Car>[];
+  
 
   void setCarList(List<Car> newCarList) {
     _carsList = newCarList;
@@ -101,9 +105,33 @@ class CarsList extends ChangeNotifier {
     }
   }
 
+
+  Future<void> addImageToFirebaseStorage(String image) async {
+    final XFile file = XFile(image);
+    final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+   
+      final List<String> split = file.path.split('/');
+      final String filename = split[split.length-1];
+      if (kIsWeb) {
+        final Reference reference = firebaseStorage
+        .ref()
+        .child('car_sale/$filename');
+        await reference
+        .putData(await XFile(image).readAsBytes(),
+        SettableMetadata(contentType: 'image/jpeg'),);
+      } else if (!kIsWeb) {
+        await firebaseStorage.ref()
+        .child('car_sale/$filename')
+        .putFile(File(image));
+      }
+    
+    
+  }
+
   Future<UserReturn> addItemInCarList(Car newItemToAdd, String email) async {
     try {
       final FirebaseFirestore database = FirebaseFirestore.instance;
+
       final DocumentSnapshot<Map<String, dynamic>> carDocument =
           await database.collection("Advertisement").doc("Advertisement").get();
       if (carDocument.data()?.isEmpty == false) {
